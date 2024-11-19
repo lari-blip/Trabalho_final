@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
 
   header: {     
     height: 180,        
-    alignItems: "center",    
+    alignItems: "center",
   },
 
   image: {
