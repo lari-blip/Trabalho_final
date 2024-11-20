@@ -30,6 +30,7 @@ export const styles = StyleSheet.create({
     position: "absolute",
     top: 240,       
   },
+  
 
   status: {
     flexDirection: "row", 
