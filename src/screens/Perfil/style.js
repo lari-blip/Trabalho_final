@@ -1,17 +1,17 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-    container: {
-        backgroundColor: "#c8f1f9",
-        width: "100%",
-        height: 180,
+    container: {              
+        width: "100%",        
         top: 0,
         position: "absolute", 
         alignItems: "center",  
     },    
 
-  header: {     
-    height: 180,        
+  header: {  
+    backgroundColor: "#c8f1f9",
+    width: "100%",    
+    height: 180,  
     alignItems: "center",
   },
 
@@ -23,13 +23,12 @@ export const styles = StyleSheet.create({
     top: 125,  
   },
 
-  title: {
-    fontSize: 25,
+  title: {   
+    fontSize: 35,
     fontWeight: "bold",
     color: "#000",
     position: "absolute",
-    top: 240, 
-    textAlign: "center", 
+    top: 240,       
   },
 
   status: {
@@ -42,83 +41,75 @@ export const styles = StyleSheet.create({
   numero: {
     fontSize: 25,
     fontWeight: "bold",
-    color: "#cc36f2",
+    color: "#504e50",
     textAlign: "center",
+    marginTop: 20,
   },
 
   texto: {
-    fontSize: 20,
+    fontSize: 25,
     color: "#000",
-    fontWeight: "bold",
-    textAlign: "center",
-    marginTop: 1,
+    fontWeight: "bold",  
+     marginTop: 5,
   },
 
   button: {
     flexDirection: "row", 
     justifyContent: "space-around", 
-    width: "60%",   
+    width: "80%",   
+    borderRadius: 50,   
     marginTop: 50,  
-    marginHorizontal: 10,   
+    marginHorizontal: 60,    
   },
 
   buttonSeguir: {
     backgroundColor: '#808080',
     borderRadius: 50,
     paddingVertical: 10,
-    paddingHorizontal: 30,
+    paddingHorizontal: 50,
   },
   buttonAguendar: {
     backgroundColor: 'red',
     borderRadius: 50,
     paddingVertical: 10,
-    paddingHorizontal: 30,
+    paddingHorizontal: 50,
   },
   buttonText: {
     color: '#fff',
-    fontSize: 18,
+    fontSize: 20,
     textAlign: 'center',
   },
 
   palavra: {
-    fontSize: 24,
+    fontSize: 40,
     color: "#000",
-    fontWeight: "bold",    
-    marginTop: 50,
-    textAlign: "left",  
-  },
+    fontWeight: "bold",
+    marginTop: 20,
+    marginBottom: 10,        
+},
 
   fotos: {
-    width: "50%",
-    height: 150,    
-    borderRadius: 10,
-    marginBottom: 20,
-    marginTop: 20,
     flexDirection: "row",
-    justifyContent: "space-around", 
-           
-  },
-  fotosImage: {
-    width: "80%", 
-    height: 100,
-    borderRadius: 10, 
-    marginBottom: 15, 
-    alignSelf: "center", // Centralizar as fotos na vertical
+    justifyContent: "space-between",  
+    width: "100%",                   
+    paddingHorizontal: 10,  
+ },
+
+  fotosImage: {    
+      width: 150,
+      height: 190,
+      borderRadius: 10,       
   },
 
-  card : {    
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    padding: 10,
-    marginBottom: 10,
-    borderRadius: 10,
-    width: "90%",
-    
-  },
+  scrollView: {
+    width: "100%", 
+},
   
-//   cardsContainer: {
-//     backgroundColor: "orange",
-
-//   },
+  categorias: {
+    fontSize: 35,
+    color: "#000",
+    fontWeight: "bold",
+    marginTop: 20,
+    marginBottom: 10,
+  },
 });
