@@ -2,21 +2,21 @@ import React from 'react';
 import { useState } from 'react';
 import { View, Text, Image, Alert, TouchableOpacity, ScrollView } from 'react-native';
 import { MaterialIcons } from "@expo/vector-icons";
-import { useNavigation } from '@react-navigation/native'; 
+import { useNavigation } from '@react-navigation/native';
 import { styles } from "./style";
 
 export default function PerfilSalao() {
     const navigation = useNavigation();
-    const [cont, setCont] = useState (155)
+    const [cont, setCont] = useState(155)
 
     const handleAgendar = () => {
-        navigation.navigate('Agendamento'); 
+        navigation.navigate('Agendamento');
     };
 
     const incrementar = () => setCont(cont + 1);
 
-    return (               
-        <View style={styles.container}>            
+    return (
+        <View style={styles.container}>
             <View style={styles.header}>
                 <Image
                     source={{ uri: 'https://i.imgur.com/LMaopsx.jpeg' }}
@@ -46,13 +46,13 @@ export default function PerfilSalao() {
 
                 <TouchableOpacity
                     style={styles.buttonSeguir}
-                    onPress={incrementar}>                    
+                    onPress={incrementar}>
                     <Text style={styles.buttonText}>Seguir</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
                     style={styles.buttonAguendar}
-                    onPress={handleAgendar} 
+                    onPress={handleAgendar}
                 >
                     <Text style={styles.buttonText}>Agendar</Text>
                 </TouchableOpacity>
@@ -62,7 +62,7 @@ export default function PerfilSalao() {
             <Text style={styles.categorias}>Categorias
                 <MaterialIcons name="chevron-right" size={30} color="#000" style={styles.scrollIcon} />
             </Text>
-            
+
             <ScrollView
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
@@ -130,12 +130,12 @@ export default function PerfilSalao() {
                     />
                 </View>
             </ScrollView>
-            
+
 
             <Text style={styles.categorias}>Posts
                 <MaterialIcons name="chevron-right" size={30} color="#000" style={styles.scrollIcon} />
             </Text>
-        </View> 
-             
+        </View>
+
     );
 }

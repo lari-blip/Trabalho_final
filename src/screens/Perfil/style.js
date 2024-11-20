@@ -109,7 +109,7 @@ export const styles = StyleSheet.create({
 },
   
   categorias: {
-    fontSize: 33,
+    fontSize: 32,
     color: "#000",
     fontWeight: "bold",
     marginTop: 20,
