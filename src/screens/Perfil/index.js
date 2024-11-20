@@ -15,8 +15,8 @@ export default function PerfilSalao() {
 
     const incrementar = () => setCont(cont + 1);
 
-    return (
-        <View style={styles.container}>
+    return (               
+        <View style={styles.container}>            
             <View style={styles.header}>
                 <Image
                     source={{ uri: 'https://i.imgur.com/LMaopsx.jpeg' }}
@@ -59,6 +59,44 @@ export default function PerfilSalao() {
                 <MaterialIcons name="more-horiz" color="black" size={25} />
             </View>
 
+            <Text style={styles.categorias}>Categorias
+                <MaterialIcons name="chevron-right" size={30} color="#000" style={styles.scrollIcon} />
+            </Text>
+            
+            <ScrollView
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+                style={styles.scrollView}
+            >
+                <View style={styles.cat}>
+                    <Image
+                        source={{ uri: 'https://img.freepik.com/vetores-gratis/mulher-com-icone-de-cabelo-comprido_1308-127889.jpg' }}
+                        style={styles.catImage}
+                    />
+                    <Image
+                        source={{ uri: 'https://png.pngtree.com/png-clipart/20210725/original/pngtree-watermelon-red-female-with-nail-polish-in-hand-png-image_6566292.jpg' }}
+                        style={styles.catImage}
+                    />
+                    <Image
+                        source={{ uri: 'https://img.myloview.com.br/quadros/olhos-com-sobrancelha-e-cilios-longos-e-pincas-para-construir-logotipo-para-sobrancelha-mater-sobrancelha-de-extensao-de-cilios-ilustracao-do-vetor-700-108407122.jpg' }}
+                        style={styles.catImage}
+                    />
+                    <Image
+                        source={{ uri: 'https://img.lovepik.com/png/20231114/make-up-sticker-cartoon_587401_wh860.png' }}
+                        style={styles.catImage}
+                    />
+                    <Image
+                        source={{ uri: 'https://i.pinimg.com/564x/65/d0/94/65d0942d0f63279339b475c2f28d361c.jpg' }}
+                        style={styles.catImage}
+                    />
+                    <Image
+                        source={{ uri: 'https://img.freepik.com/premium-vector/bearded-barber-head-logo-stylish-circle-vector_1023984-20538.jpg?w=826' }}
+                        style={styles.catImage}
+                    />
+                </View>
+            </ScrollView>
+
+
             <Text style={styles.palavra}>Fotos
                 <MaterialIcons name="chevron-right" size={30} color="#000" style={styles.scrollIcon} />
             </Text>
@@ -92,13 +130,12 @@ export default function PerfilSalao() {
                     />
                 </View>
             </ScrollView>
-            <Text style={styles.categorias}>Categorias
-                <MaterialIcons name="chevron-right" size={30} color="#000" style={styles.scrollIcon} />
-            </Text>
+            
 
             <Text style={styles.categorias}>Posts
                 <MaterialIcons name="chevron-right" size={30} color="#000" style={styles.scrollIcon} />
             </Text>
-        </View>
+        </View> 
+             
     );
 }
