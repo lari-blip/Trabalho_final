@@ -1,9 +1,16 @@
 import React from 'react';
 import { View, Text, Image, Alert, TouchableOpacity, ScrollView } from 'react-native';
 import { MaterialIcons } from "@expo/vector-icons";
+import { useNavigation } from '@react-navigation/native'; // Importando o hook de navegação
 import { styles } from "./style";
 
 export default function PerfilSalao() {
+    const navigation = useNavigation(); // Usando o hook de navegação
+
+    const handleAgendar = () => {
+        navigation.navigate('Agendamento'); // Navegar para a tela de agendamento
+    };
+
     return (
         <View style={styles.container}>
 
@@ -42,7 +49,8 @@ export default function PerfilSalao() {
 
                 <TouchableOpacity
                     style={styles.buttonAguendar}
-                    onPress={() => Alert.alert('Você agendou uma visita')}>
+                    onPress={handleAgendar} // Chama a função de navegação ao pressionar o botão Agendar
+                >
                     <Text style={styles.buttonText}>Agendar</Text>
                 </TouchableOpacity>
             </View>
