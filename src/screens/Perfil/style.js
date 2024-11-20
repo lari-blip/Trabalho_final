@@ -30,7 +30,7 @@ export const styles = StyleSheet.create({
     position: "absolute",
     top: 240,       
   },
-  
+
 
   status: {
     flexDirection: "row", 
@@ -48,7 +48,7 @@ export const styles = StyleSheet.create({
   },
 
   texto: {
-    fontSize: 25,
+    fontSize: 21,
     color: "#000",
     fontWeight: "bold",  
      marginTop: 5,
@@ -82,7 +82,7 @@ export const styles = StyleSheet.create({
   },
 
   palavra: {
-    fontSize: 40,
+    fontSize: 38,
     color: "#000",
     fontWeight: "bold",
     marginTop: 20,
@@ -93,13 +93,15 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",  
     width: "100%",                   
-    paddingHorizontal: 10,  
+    paddingHorizontal: 10,      
+  
  },
 
   fotosImage: {    
       width: 150,
       height: 190,
-      borderRadius: 10,       
+      borderRadius: 10, 
+      marginHorizontal: 10,     
   },
 
   scrollView: {
@@ -107,10 +109,26 @@ export const styles = StyleSheet.create({
 },
   
   categorias: {
-    fontSize: 35,
+    fontSize: 32,
     color: "#000",
     fontWeight: "bold",
     marginTop: 20,
     marginBottom: 10,
   },
+  cat: {
+    flexDirection: "row",
+    justifyContent: "space-between",  
+    width: "100%",                   
+    paddingHorizontal: 10,      
+  },
+
+ catImage: {    
+  width: 90,
+  height: 90,
+  borderRadius: 600, 
+  marginHorizontal: 10,     
+},
+
+
+
 });

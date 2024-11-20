@@ -2,15 +2,15 @@ import React from 'react';
 import { useState } from 'react';
 import { View, Text, Image, Alert, TouchableOpacity, ScrollView } from 'react-native';
 import { MaterialIcons } from "@expo/vector-icons";
-import { useNavigation } from '@react-navigation/native'; 
+import { useNavigation } from '@react-navigation/native';
 import { styles } from "./style";
 
 export default function PerfilSalao() {
     const navigation = useNavigation();
-    const [cont, setCont] = useState (155)
+    const [cont, setCont] = useState(155)
 
     const handleAgendar = () => {
-        navigation.navigate('Agendamento'); 
+        navigation.navigate('Agendamento');
     };
 
     const incrementar = () => setCont(cont + 1);
@@ -46,18 +46,56 @@ export default function PerfilSalao() {
 
                 <TouchableOpacity
                     style={styles.buttonSeguir}
-                    onPress={incrementar}>                    
+                    onPress={incrementar}>
                     <Text style={styles.buttonText}>Seguir</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
                     style={styles.buttonAguendar}
-                    onPress={handleAgendar} 
+                    onPress={handleAgendar}
                 >
                     <Text style={styles.buttonText}>Agendar</Text>
                 </TouchableOpacity>
                 <MaterialIcons name="more-horiz" color="black" size={25} />
             </View>
+
+            <Text style={styles.categorias}>Categorias
+                <MaterialIcons name="chevron-right" size={30} color="#000" style={styles.scrollIcon} />
+            </Text>
+
+            <ScrollView
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+                style={styles.scrollView}
+            >
+                <View style={styles.cat}>
+                    <Image
+                        source={{ uri: 'https://img.freepik.com/vetores-gratis/mulher-com-icone-de-cabelo-comprido_1308-127889.jpg' }}
+                        style={styles.catImage}
+                    />
+                    <Image
+                        source={{ uri: 'https://png.pngtree.com/png-clipart/20210725/original/pngtree-watermelon-red-female-with-nail-polish-in-hand-png-image_6566292.jpg' }}
+                        style={styles.catImage}
+                    />
+                    <Image
+                        source={{ uri: 'https://img.myloview.com.br/quadros/olhos-com-sobrancelha-e-cilios-longos-e-pincas-para-construir-logotipo-para-sobrancelha-mater-sobrancelha-de-extensao-de-cilios-ilustracao-do-vetor-700-108407122.jpg' }}
+                        style={styles.catImage}
+                    />
+                    <Image
+                        source={{ uri: 'https://img.lovepik.com/png/20231114/make-up-sticker-cartoon_587401_wh860.png' }}
+                        style={styles.catImage}
+                    />
+                    <Image
+                        source={{ uri: 'https://i.pinimg.com/564x/65/d0/94/65d0942d0f63279339b475c2f28d361c.jpg' }}
+                        style={styles.catImage}
+                    />
+                    <Image
+                        source={{ uri: 'https://img.freepik.com/premium-vector/bearded-barber-head-logo-stylish-circle-vector_1023984-20538.jpg?w=826' }}
+                        style={styles.catImage}
+                    />
+                </View>
+            </ScrollView>
+
 
             <Text style={styles.palavra}>Fotos
                 <MaterialIcons name="chevron-right" size={30} color="#000" style={styles.scrollIcon} />
@@ -92,13 +130,12 @@ export default function PerfilSalao() {
                     />
                 </View>
             </ScrollView>
-            <Text style={styles.categorias}>Categorias
-                <MaterialIcons name="chevron-right" size={30} color="#000" style={styles.scrollIcon} />
-            </Text>
+
 
             <Text style={styles.categorias}>Posts
                 <MaterialIcons name="chevron-right" size={30} color="#000" style={styles.scrollIcon} />
             </Text>
         </View>
+
     );
 }
