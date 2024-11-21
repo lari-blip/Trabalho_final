@@ -17,12 +17,12 @@ export default function PerfilSalao() {
 
     return (
         <ScrollView style={styles.container}>
-            {/* Header with Image and Title */}
             <View style={styles.header}>
                 <Image
                     source={{ uri: 'https://i.imgur.com/LMaopsx.jpeg' }}
                     style={styles.image}
                 />
+
                 <Text style={styles.title}>Beleza Total</Text>
             </View>
 
