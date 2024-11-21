@@ -57,7 +57,7 @@ const HomeScreen = () => {
                 ? 'Histórico'
                 : icon === 'calendar'
                 ? 'Agenda'
-                : 'Seguindo'}
+                : 'Perfil'}
             </Text>
           </TouchableOpacity>
         ))}
