@@ -1,5 +1,3 @@
-import React from 'react';
-import { View, Text, Button } from 'react-native';
 import React, { useState } from 'react';
 import {
   View,
@@ -12,12 +10,6 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome'; // Importando FontAwesome icons
 
 export default function LoginScreen({ navigation }) {
-    return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Login Screen</Text>
-            <Button title="Go Back" onPress={() => navigation.goBack()} />
-        </View>
-    );
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -41,7 +33,7 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      
+
       <Text style={styles.title}>Sign in</Text>
       <TextInput
         style={styles.input}
@@ -144,9 +136,9 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   socialButton: {
-    backgroundColor: 'transparent', 
+    backgroundColor: 'transparent',
     borderWidth: 2,
-    borderColor: '#5E3B26', 
+    borderColor: '#5E3B26',
     width: 60,
     height: 60,
     borderRadius: 30,

@@ -5,7 +5,7 @@ import { Ionicons } from '@expo/vector-icons';  // Importando os ícones
 import ExploreScreen from '../screens/Explore/ExploreScreen';
 import HomeScreen from '../screens/Home/HomeScreen';
 import NotificationsScreen from '../screens/Notification/NotificationsScreen';
-import PerfilSalao from '../screens/Perfil';
+import PerfilSalao from '../screens/PerfilSalão/index';
 import LoginScreen from '../screens/Login/LoginScreen';
 import AgendamentoScreen from '../screens/Agendamento/AgendamentoScreen';
 import RegisterScreen from '../screens/Cadastro/RegisterScreen';
@@ -17,7 +17,6 @@ function MainTabs() {
     return (
         <Tab.Navigator
             screenOptions={{
-                tabBarActiveTintColor: '#e91e63',
                 tabBarActiveTintColor: '#e9a0b8',
                 tabBarInactiveTintColor: 'gray',
             }}
@@ -50,14 +49,10 @@ function MainTabs() {
                 }}
             />
             <Tab.Screen
-                name="Perfil"
-                component={PerfilSalao}
-         <Tab.Screen
                 name="Login"
                 component={LoginScreen}
                 options={{
                     tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="person" size={size} color={color} />
                         <Ionicons name="log-in" size={size} color={color} />
                     ),
                 }}
@@ -70,7 +65,6 @@ export default function AppNavigator() {
     return (
         <Stack.Navigator>
             <Stack.Screen name="Main" component={MainTabs} />
-           <Stack.Screen name="Main" component={MainTabs} />
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="Cadastro" component={RegisterScreen} />
             <Stack.Screen name="Explorar" component={ExploreScreen} />
@@ -78,5 +72,4 @@ export default function AppNavigator() {
             <Stack.Screen name="Agendamento" component={AgendamentoScreen} />
         </Stack.Navigator>
     );
-}
 }

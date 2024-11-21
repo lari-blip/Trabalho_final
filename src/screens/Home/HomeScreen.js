@@ -1,4 +1,4 @@
-import React from 'react'; 
+import React from 'react';
 import {
   View,
   Text,
@@ -9,8 +9,6 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { useNavigation } from '@react-navigation/native';
-import PerfilSalao from '../Perfil';
 
 const categories = [
   { name: 'Unhas', image: 'https://i.pinimg.com/736x/85/f9/5d/85f95dfab5b4b80ccc9fae275c7bec5f.jpg' },
@@ -30,12 +28,6 @@ const salons = [
 ];
 
 const HomeScreen = () => {
-  const navigation = useNavigation();
-
-  const handleSalonClick = (salonId) => {
-    navigation.navigate('PerfilSalao', { salonId });
-  };
-
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
       {/* Logo */}
@@ -62,11 +54,10 @@ const HomeScreen = () => {
               {icon === 'heart'
                 ? 'Favoritos'
                 : icon === 'history'
-                ? 'Histórico'
-                : icon === 'calendar'
-                ? 'Agenda'
-                : 'Seguindo'}
-                : 'Perfil'}
+                  ? 'Histórico'
+                  : icon === 'calendar'
+                    ? 'Agenda'
+                    : 'Perfil'}
             </Text>
           </TouchableOpacity>
         ))}
@@ -95,11 +86,6 @@ const HomeScreen = () => {
       <Text style={styles.sectionTitle}>Salões</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.salonScroll}>
         {salons.map((salon) => (
-          <TouchableOpacity
-            key={salon.id}
-            style={styles.salonCard}
-            onPress={() => handleSalonClick(salon.id)}
-          >
           <TouchableOpacity key={salon.id} style={styles.salonCard}>
             <Image source={{ uri: salon.image }} style={styles.salonImage} />
             <Text style={styles.salonName}>{salon.name}</Text>
@@ -124,8 +110,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   logo: {
-    width: 130,  
-    height: 50,  
+    width: 130,
+    height: 50,
     resizeMode: 'contain',
   },
   searchBar: {
@@ -221,5 +207,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
 export default HomeScreen;
