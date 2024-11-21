@@ -1,11 +1,6 @@
-// ExploreScreen.js
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { useIsFocused } from '@react-navigation/native';  // Hook para verificar se a tela está ativa
 import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
 
-const ExploreScreen = () => {
-  const isFocused = useIsFocused();
 export default function ExploreScreen({ navigation }) {
   const exploreItems = [
     {
@@ -53,11 +48,9 @@ export default function ExploreScreen({ navigation }) {
   );
 
   return (
-    <View style={[styles.container, { backgroundColor: isFocused ? 'blue' : 'white' }]}>
-      <Text style={styles.text}>Explore Screen</Text>
     <View style={styles.container}>
-      
-  
+
+
       <Text style={styles.sectionTitle}>Explorar</Text>
       <FlatList
         data={exploreItems}
@@ -71,19 +64,21 @@ export default function ExploreScreen({ navigation }) {
       </TouchableOpacity>
     </View>
   );
-};
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    backgroundColor: '#f9f7f7',
+    padding: 15,
+  },
+  contentContainer: {
+    paddingBottom: 20,
+  },
+  logoContainer: {
     alignItems: 'center',
     marginBottom: 20,
   },
-  text: {
-    fontSize: 24,
-    color: 'white',
   sectionTitle: {
     fontSize: 20,
     fontWeight: '600',
@@ -91,13 +86,10 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     textAlign: 'left',
   },
-});
-
-export default ExploreScreen;
   categoryCard: {
     backgroundColor: '#FFF',
     borderRadius: 15,
-    marginBottom: 20, 
+    marginBottom: 20,
     shadowColor: '#000',
     shadowOpacity: 0.15,
     shadowRadius: 10,
@@ -107,7 +99,7 @@ export default ExploreScreen;
   imageCard: {
     backgroundColor: '#FFF',
     borderRadius: 15,
-    marginRight: 15, 
+    marginRight: 15,
     padding: 5,
     shadowColor: '#000',
     shadowOpacity: 0.1,
