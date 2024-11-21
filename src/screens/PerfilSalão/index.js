@@ -8,7 +8,10 @@ export default function PerfilSalao() {
     const [followers, setFollowers] = useState(155);
 
     const handleAgendar = () => {
-        navigation.navigate('Agendamento');
+        navigation.navigate('Agendamento', {
+            profileName: 'Beleza Total',
+            profileImage: 'https://i.imgur.com/LMaopsx.jpeg',
+        });
     };
 
     const handleFollow = () => {
