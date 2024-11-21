@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
-import PerfilSalao from '../Perfil';
+import PerfilSalao from '../PerfilSalão';
 
 const categories = [
   { name: 'Unhas', image: 'https://i.pinimg.com/736x/85/f9/5d/85f95dfab5b4b80ccc9fae275c7bec5f.jpg' },

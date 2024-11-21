@@ -5,7 +5,7 @@ import { Ionicons } from '@expo/vector-icons';  // Importando os ícones
 import ExploreScreen from '../screens/Explore/ExploreScreen';
 import HomeScreen from '../screens/Home/HomeScreen';
 import NotificationsScreen from '../screens/Notification/NotificationsScreen';
-import PerfilSalao from '../screens/Perfil';
+import PerfilSalao from '../screens/PerfilSalão';
 import LoginScreen from '../screens/Login/LoginScreen';
 import AgendamentoScreen from '../screens/Agendamento/AgendamentoScreen';
 
