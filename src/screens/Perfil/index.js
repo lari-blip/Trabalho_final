@@ -10,7 +10,10 @@ export default function PerfilSalao() {
     const [cont, setCont] = useState(155)
 
     const handleAgendar = () => {
-        navigation.navigate('Agendamento');
+        navigation.navigate('Agendamento', {
+            profileImage: 'https://i.imgur.com/LMaopsx.jpeg',
+            profileName: 'Beleza Total',
+        });
     };
 
     const incrementar = () => setCont(cont + 1);
