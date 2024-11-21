@@ -8,6 +8,7 @@ import NotificationsScreen from '../screens/Notification/NotificationsScreen';
 import PerfilSalao from '../screens/PerfilSalão';
 import LoginScreen from '../screens/Login/LoginScreen';
 import AgendamentoScreen from '../screens/Agendamento/AgendamentoScreen';
+import RegisterScreen from '../screens/Cadastro/RegisterScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -16,7 +17,7 @@ function MainTabs() {
     return (
         <Tab.Navigator
             screenOptions={{
-                tabBarActiveTintColor: '#e91e63',
+                tabBarActiveTintColor: '#e9a0b8',
                 tabBarInactiveTintColor: 'gray',
             }}
         >
@@ -48,11 +49,11 @@ function MainTabs() {
                 }}
             />
             <Tab.Screen
-                name="Perfil"
-                component={PerfilSalao}
+                name="Login"
+                component={LoginScreen}
                 options={{
                     tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="person" size={size} color={color} />
+                        <Ionicons name="log-in" size={size} color={color} />
                     ),
                 }}
             />
@@ -65,6 +66,8 @@ export default function AppNavigator() {
         <Stack.Navigator>
             <Stack.Screen name="Main" component={MainTabs} />
             <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen name="Cadastro" component={RegisterScreen} />
+            <Stack.Screen name="Explorar" component={ExploreScreen} />
             <Stack.Screen name="PerfilSalao" component={PerfilSalao} />
             <Stack.Screen name="Agendamento" component={AgendamentoScreen} />
         </Stack.Navigator>

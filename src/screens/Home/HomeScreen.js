@@ -1,4 +1,4 @@
-import React from 'react'; 
+import React from 'react';
 import {
   View,
   Text,
@@ -30,12 +30,6 @@ const salons = [
 ];
 
 const HomeScreen = () => {
-  const navigation = useNavigation();
-
-  const handleSalonClick = (salonId) => {
-    navigation.navigate('PerfilSalao', { salonId });
-  };
-
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
       {/* Logo */}
@@ -62,10 +56,10 @@ const HomeScreen = () => {
               {icon === 'heart'
                 ? 'Favoritos'
                 : icon === 'history'
-                ? 'Histórico'
-                : icon === 'calendar'
-                ? 'Agenda'
-                : 'Seguindo'}
+                  ? 'Histórico'
+                  : icon === 'calendar'
+                    ? 'Agenda'
+                    : 'Perfil'}
             </Text>
           </TouchableOpacity>
         ))}
@@ -94,11 +88,7 @@ const HomeScreen = () => {
       <Text style={styles.sectionTitle}>Salões</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.salonScroll}>
         {salons.map((salon) => (
-          <TouchableOpacity
-            key={salon.id}
-            style={styles.salonCard}
-            onPress={() => handleSalonClick(salon.id)}
-          >
+          <TouchableOpacity key={salon.id} style={styles.salonCard}>
             <Image source={{ uri: salon.image }} style={styles.salonImage} />
             <Text style={styles.salonName}>{salon.name}</Text>
           </TouchableOpacity>
@@ -122,8 +112,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   logo: {
-    width: 130,  
-    height: 50,  
+    width: 130,
+    height: 50,
     resizeMode: 'contain',
   },
   searchBar: {
