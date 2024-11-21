@@ -66,6 +66,7 @@ const HomeScreen = () => {
                 : icon === 'calendar'
                 ? 'Agenda'
                 : 'Seguindo'}
+                : 'Perfil'}
             </Text>
           </TouchableOpacity>
         ))}
@@ -99,6 +100,7 @@ const HomeScreen = () => {
             style={styles.salonCard}
             onPress={() => handleSalonClick(salon.id)}
           >
+          <TouchableOpacity key={salon.id} style={styles.salonCard}>
             <Image source={{ uri: salon.image }} style={styles.salonImage} />
             <Text style={styles.salonName}>{salon.name}</Text>
           </TouchableOpacity>
@@ -219,4 +221,5 @@ const styles = StyleSheet.create({
   },
 });
 
+export default HomeScreen;
 export default HomeScreen;
