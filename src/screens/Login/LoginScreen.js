@@ -162,6 +162,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     borderWidth: 2,
     borderColor: '#e9a0b8',
+    borderColor: '#F2AA7D',
     marginBottom: 15,
     fontSize: 18, 
     color: '#fff', 
@@ -169,6 +170,7 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#e9a0b8',
+    backgroundColor: '#F2AA7D',
     paddingVertical: 15, 
     borderRadius: 30,
     alignItems: 'center',
@@ -192,6 +194,7 @@ const styles = StyleSheet.create({
   },
   registerText: {
     color: '#e9a0b8',
+    color: '#F2AA7D',
 
     fontWeight: 'bold',
   },
@@ -205,6 +208,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent', 
     borderWidth: 2,
     borderColor: '#e9a0b8',
+    borderColor: '#F2AA7D',
 
     width: 60,
     height: 60,
