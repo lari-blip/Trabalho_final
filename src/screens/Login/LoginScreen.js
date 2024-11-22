@@ -8,6 +8,7 @@ import {
   StyleSheet,
   ImageBackground,
   Image,
+
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'; // Importando FontAwesome icons
 
@@ -22,18 +23,21 @@ export default function LoginScreen({ navigation }) {
 
   const handleLogin = () => {
     if (!email || !password) {
-      Alert.alert('Erro', 'Por favor, preencha todos os campos!!');
+
+      Alert.alert('Erro', 'Por favor, preencha todos os campos!');
     } else if (!validateEmail(email)) {
       Alert.alert('Erro', 'Por favor, insira um e-mail válido!');
     } else if (password.length !== 6) {
       Alert.alert('Erro', 'A senha deve ter 6 caracteres!');
     } else {
       Alert.alert('Erro', 'Você não tem cadastro!');
+
       navigation.navigate('Main');
     }
   };
 
   return (
+
     <ImageBackground 
       source={{uri: 'https://i.pinimg.com/736x/b3/31/f5/b331f538d29019dfbc69fa3f564eb99f.jpg'}} // Link da imagem de fundo
       style={styles.container}
@@ -88,12 +92,14 @@ export default function LoginScreen({ navigation }) {
         </View>
       </View>
     </ImageBackground>
+
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
@@ -120,10 +126,12 @@ const styles = StyleSheet.create({
     fontSize: 28,
     color: '#fff',
     fontFamily: 'Poppins', 
+
     textAlign: 'center',
     marginBottom: 20,
   },
   input: {
+
     backgroundColor: 'transparent', 
     paddingVertical: 15, 
     paddingHorizontal: 20,
@@ -142,6 +150,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 20,
     width: '100%',
+
   },
   buttonText: {
     color: '#fff',
@@ -151,6 +160,7 @@ const styles = StyleSheet.create({
   registerRow: {
     flexDirection: 'row',
     justifyContent: 'center',
+
     marginBottom: 30, 
   },
   text: {
@@ -158,21 +168,26 @@ const styles = StyleSheet.create({
   },
   registerText: {
     color: '#e9a0b8',
+
     fontWeight: 'bold',
   },
   socialContainer: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
+
     marginTop: 20,
   },
   socialButton: {
     backgroundColor: 'transparent', 
     borderWidth: 2,
     borderColor: '#e9a0b8',
+
     width: 60,
     height: 60,
     borderRadius: 30,
     justifyContent: 'center',
     alignItems: 'center',
   },
+
 });
+

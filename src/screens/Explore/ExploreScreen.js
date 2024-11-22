@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity, ScrollView, ImageBackground } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
 
 export default function ExploreScreen({ navigation }) {
-
+ 
   const exploreItems = [
     {
       id: '1',
@@ -35,117 +35,106 @@ export default function ExploreScreen({ navigation }) {
     },
   ];
 
+
   const handleCategoryPress = (categoryName) => {
+
     navigation.navigate('CategoryDetails', { categoryName });
   };
 
+ 
   const renderItem = ({ item }) => (
     <View style={styles.categoryCard}>
       <Text style={styles.sectionTitle}>{item.name}</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {item.images.map((image, index) => (
-          <View style={styles.imageCard} key={index}>
+          <TouchableOpacity
+            style={styles.imageCard}
+            key={index}
+            onPress={() => handleCategoryPress(item.name)} 
+          >
             <Image source={{ uri: image }} style={styles.categoryImage} />
-          </View>
+          </TouchableOpacity>
         ))}
       </ScrollView>
     </View>
   );
 
   return (
-    <ImageBackground 
-      source={{uri: 'https://i.pinimg.com/736x/e5/37/3e/e5373ee2006e669ce7443ba43e8a6fe8.jpg'}} // Link da imagem de fundo
-      style={styles.container}
-      imageStyle={styles.backgroundImage} // Estilo da imagem de fundo
-    >
-      <View style={styles.overlay}>
-        <Text style={styles.pageTitle}>Explorar</Text>
-        <FlatList
-          data={exploreItems}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id}
-          contentContainerStyle={styles.contentContainer}
-          showsVerticalScrollIndicator={false}
-        />
-        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-          <Text style={styles.backButtonText}>Voltar</Text>
-        </TouchableOpacity>
-      </View>
-    </ImageBackground>
+    <View style={styles.container}>
+      <Text style={styles.pageTitle}>Explorar</Text>
+      <FlatList
+        data={exploreItems}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+        contentContainerStyle={styles.contentContainer}
+        showsVerticalScrollIndicator={false}
+      />
+      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+        <Text style={styles.backButtonText}>Voltar</Text>
+      </TouchableOpacity>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-  },
-  overlay: {
-    flex: 1, 
-    width: '100%', 
-    padding: 30,
-    justifyContent: 'flex-start',
-  },
-  backgroundImage: {
-    opacity: 0.8,
+    backgroundColor: '#f9f7f7',
+    paddingHorizontal: 20,
+    paddingTop: 40,
   },
   pageTitle: {
     fontSize: 28,
     fontWeight: '700',
-    color: '#fff',
+    color: '#5E3B26',
     marginBottom: 16,
     textAlign: 'center',
-    fontFamily: 'Poppins', // Fonte personalizada
+    opacity: 0,  
+    animation: 'fadeIn 1s ease-out forwards', 
   },
   contentContainer: {
-    paddingBottom: 20, 
-  },
-  logoContainer: {
-    alignItems: 'center',
-    marginBottom: 20,
+    paddingBottom: 20,
   },
   sectionTitle: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: '600',
     color: '#5E3B26',
     marginBottom: 12,
     textAlign: 'left',
   },
   categoryCard: {
-    backgroundColor: 'rgba(255, 255, 255, 0.85)', // Fundo branco translúcido para os cards
+    backgroundColor: '#FFF',
     borderRadius: 15,
-    marginBottom: 20, 
-    shadowColor: '#000',
-    shadowOpacity: 0.15,
-    shadowRadius: 10,
-    shadowOffset: { width: 0, height: 3 },
-    padding: 12,
-  },
-  imageCard: {
-    backgroundColor: 'transparent', // Fundo transparente para a imagem
-    borderRadius: 15,
-    marginRight: 15, 
-    padding: 5,
+    marginBottom: 20,
+    padding: 16,
     shadowColor: '#000',
     shadowOpacity: 0.1,
-    shadowRadius: 8,
-    shadowOffset: { width: 0, height: 3 },
+    shadowRadius: 15,
+    shadowOffset: { width: 0, height: 5 },
+    elevation: 5,
+  },
+  imageCard: {
+    backgroundColor: '#FFF',
+    borderRadius: 15,
+    marginRight: 12,
+    overflow: 'hidden',
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    shadowOffset: { width: 0, height: 4 },
   },
   categoryImage: {
-    width: 120,
-    height: 120,
+    width: 160,
+    height: 160,
     borderRadius: 12,
     resizeMode: 'cover',
   },
   backButton: {
-    backgroundColor: '#e9a0b8',
+    backgroundColor: '#5E3B26',
     paddingVertical: 15,
     borderRadius: 10,
     alignItems: 'center',
     marginTop: 20,
-    width: '100%',
   },
   backButtonText: {
     color: '#fff',
