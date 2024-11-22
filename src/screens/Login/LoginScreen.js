@@ -22,7 +22,7 @@ export default function LoginScreen({ navigation }) {
 
   const handleLogin = () => {
     if (!email || !password) {
-      Alert.alert('Erro', 'Por favor, preencha todos os campos!');
+      Alert.alert('Erro', 'Por favor, preencha todos os campos!!');
     } else if (!validateEmail(email)) {
       Alert.alert('Erro', 'Por favor, insira um e-mail válido!');
     } else if (password.length !== 6) {

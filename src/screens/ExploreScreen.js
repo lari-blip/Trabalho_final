@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   backButton: {
-    backgroundColor: '#5E3B26',
+    backgroundColor: '#e9a0b8',
     paddingVertical: 15,
     borderRadius: 10,
     alignItems: 'center',
