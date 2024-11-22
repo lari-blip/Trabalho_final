@@ -8,7 +8,10 @@ import NotificationsScreen from '../screens/Notification/NotificationsScreen';
 import PerfilSalao from '../screens/PerfilSalão';
 import LoginScreen from '../screens/Login/LoginScreen';
 import AgendamentoScreen from '../screens/Agendamento/AgendamentoScreen';
+
 import RegisterScreen from '../screens/Cadastro/RegisterScreen';
+import CartScreen from '../screens/Cart/CartScreen';
+
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -36,6 +39,15 @@ function MainTabs() {
                 options={{
                     tabBarIcon: ({ color, size }) => (
                         <Ionicons name="search" size={size} color={color} />
+                    ),
+                }}
+            />
+            <Tab.Screen
+                name="Cart"
+                component={CartScreen}
+                options={{
+                    tabBarIcon: ({ color, size }) => (
+                        <Ionicons name="cart" size={size} color={color} />
                     ),
                 }}
             />
