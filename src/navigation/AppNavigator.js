@@ -31,6 +31,7 @@ function MainTabs() {
                     tabBarIcon: ({ color, size }) => (
                         <Ionicons name="home" size={size} color={color} />
                     ),
+                    headerShown: false,
                 }}
             />
             <Tab.Screen
@@ -40,6 +41,7 @@ function MainTabs() {
                     tabBarIcon: ({ color, size }) => (
                         <Ionicons name="search" size={size} color={color} />
                     ),
+                    headerShown: false,
                 }}
             />
             <Tab.Screen
@@ -49,6 +51,7 @@ function MainTabs() {
                     tabBarIcon: ({ color, size }) => (
                         <Ionicons name="cart" size={size} color={color} />
                     ),
+                    headerShown: false,
                 }}
             />
             <Tab.Screen
@@ -58,6 +61,7 @@ function MainTabs() {
                     tabBarIcon: ({ color, size }) => (
                         <Ionicons name="notifications" size={size} color={color} />
                     ),
+                    headerShown: false,
                 }}
             />
             <Tab.Screen
@@ -67,6 +71,7 @@ function MainTabs() {
                     tabBarIcon: ({ color, size }) => (
                         <Ionicons name="log-in" size={size} color={color} />
                     ),
+                    headerShown: false,
                 }}
             />
         </Tab.Navigator>
@@ -75,7 +80,9 @@ function MainTabs() {
 
 export default function AppNavigator() {
     return (
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions={{
+            headerShown: false, // Oculta o cabeçalho do Stack.Navigator
+        }}>
             <Stack.Screen name="Main" component={MainTabs} />
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="Cadastro" component={RegisterScreen} />

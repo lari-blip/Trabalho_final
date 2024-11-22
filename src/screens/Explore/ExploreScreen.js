@@ -51,7 +51,7 @@ export default function ExploreScreen({ navigation }) {
     <View style={styles.container}>
 
 
-      <Text style={styles.sectionTitle}>Explorar</Text>
+      <Text style={styles.pageTitle}>Explorar</Text>
       <FlatList
         data={exploreItems}
         renderItem={renderItem}
@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
     color: '#5E3B26',
     marginBottom: 12,
     textAlign: 'left',
+
   },
   categoryCard: {
     backgroundColor: '#FFF',
@@ -124,4 +125,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+  pageTitle: {
+    fontSize: 25,
+    fontWeight: '600',
+    color: '#5E3B26',
+    marginBottom: 12,
+    textAlign: 'left',
+    marginTop: 80,
+    marginLeft:10,
+  }
 });
