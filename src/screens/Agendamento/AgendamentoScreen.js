@@ -285,12 +285,14 @@ export default function AgendamentoScreen() {
             />
             <View>
                 <Text style={styles.profileInfoTitle}>Redes Sociais 🌐</Text>
-                <Image
-                    source={{
-                        uri: 'https://belezanatural.com.br/wp-content/themes/beleza-natural/template_assets/banner_intagram_desktop.png',
-                    }}
-                    style={styles.socialImage}
-            />
+                <TouchableOpacity>
+                    <Image
+                        source={{
+                            uri: 'https://belezanatural.com.br/wp-content/themes/beleza-natural/template_assets/banner_intagram_desktop.png',
+                        }}
+                        style={styles.socialImage}
+                    />
+                </TouchableOpacity>
                 <Text style={styles.title}>Informações do Perfil</Text>
                 <View style={styles.profileInfoContainer}>
                     <View style={styles.infoCard}>
@@ -303,7 +305,7 @@ export default function AgendamentoScreen() {
                 <View style={styles.infoCard}>
                     <Text style={styles.profileInfoTitle}>Endereço: 📍</Text>
                     <Text style={styles.profileInfoText}>
-                        Rua Exemplo, 123 - Centro
+                        CabeloCity, 123 - Centro
                     </Text>
                 </View>
 
@@ -348,11 +350,6 @@ const styles = StyleSheet.create({
     },
     map: {
         flex: 1,
-    },
-    title: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginVertical: 8,
     },
     daysContainer: {
         flexDirection: 'row',
@@ -577,8 +574,8 @@ const styles = StyleSheet.create({
     infoCard: {
         backgroundColor: '#FFFFFF',
         borderRadius: 10,
-        padding: 16,
-        marginBottom: 16,
+        padding: 30,
+        marginBottom: 30,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.1,
@@ -691,16 +688,5 @@ const styles = StyleSheet.create({
     profileInfoContainer: {
         marginTop: 20,
         paddingHorizontal: 16,
-    },
-    profileInfoTitle: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginBottom: 5,
-    },
-    profileInfoText: {
-        fontSize: 16,
-        color: '#555',
-        marginBottom: 30,
-        lineHeight: 24,
     },
 });
