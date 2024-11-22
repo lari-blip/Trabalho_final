@@ -49,6 +49,14 @@ export default function AgendamentoScreen() {
         setLikes(updatedLikes);
     };
 
+    /**
+     * Adiciona um comentário ao post
+     * 
+     * @param {number} postId - ID do post que recebeu o comentário
+     * 
+     * Função que verifica se o comentário não está vazio e o adiciona ao estado dos comentários.
+     * Caso o campo de comentário esteja vazio, exibe um alerta.
+     */
     const handleAddComment = (postId) => {
         if (newComment.trim() === "") {
             Alert.alert("Por favor, escreva um comentário.");
@@ -193,7 +201,7 @@ export default function AgendamentoScreen() {
             </ScrollView>
 
             <Text style={styles.title}>Avaliações dos Clientes</Text>
-            <ScrollView horizontal={true} style={styles.reviewsContainer}>
+            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.reviewsContainer}>
                 {reviews.map((review) => (
                     <View key={review.id} style={styles.reviewCard}>
                         <View style={styles.reviewHeader}>
