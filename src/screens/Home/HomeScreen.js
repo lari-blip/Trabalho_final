@@ -130,6 +130,8 @@ const styles = StyleSheet.create({
     width: 130,
     height: 50,
     resizeMode: 'contain',
+    marginTop: 80,
+
   },
   searchBar: {
     backgroundColor: '#fff',
