@@ -6,6 +6,8 @@ import {
   TouchableOpacity,
   Alert,
   StyleSheet,
+  ImageBackground,
+  Image,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'; // Importando FontAwesome icons
 
@@ -26,93 +28,120 @@ export default function LoginScreen({ navigation }) {
     } else if (password.length !== 6) {
       Alert.alert('Erro', 'A senha deve ter 6 caracteres!');
     } else {
-      Alert.alert('Erro', 'Você está não tem cadastro!');
+      Alert.alert('Erro', 'Você não tem cadastro!');
       navigation.navigate('Main');
     }
   };
 
   return (
-    <View style={styles.container}>
-      
-      <Text style={styles.title}>Sign in</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        placeholderTextColor="#ccc"
-        value={email}
-        onChangeText={setEmail}
-        keyboardType="email-address"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Senha"
-        placeholderTextColor="#ccc"
-        secureTextEntry
-        value={password}
-        onChangeText={setPassword}
-        maxLength={6}
-      />
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Sign in</Text>
-      </TouchableOpacity>
-      <View style={styles.registerRow}>
-        <Text style={styles.text}>Você não tem uma conta? </Text>
-        <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-          <Text style={styles.registerText}>Cadastrar</Text>
+    <ImageBackground 
+      source={{uri: 'https://i.pinimg.com/736x/b3/31/f5/b331f538d29019dfbc69fa3f564eb99f.jpg'}} // Link da imagem de fundo
+      style={styles.container}
+      imageStyle={styles.backgroundImage} // Estilo da imagem de fundo
+    >
+      <View style={styles.overlay}>
+        <Image source={{uri: 'https://i.imgur.com/ULWXfpT.png'}} style={styles.logo} />
+        
+        <Text style={styles.title}>Entrar</Text>
+        
+        <TextInput
+          style={styles.input}
+          placeholder="Email"
+          placeholderTextColor="#ccc"
+          value={email}
+          onChangeText={setEmail}
+          keyboardType="email-address"
+        />
+        
+        <TextInput
+          style={styles.input}
+          placeholder="Senha"
+          placeholderTextColor="#ccc"
+          secureTextEntry
+          value={password}
+          onChangeText={setPassword}
+          maxLength={6}
+        />
+        
+        <TouchableOpacity style={styles.button} onPress={handleLogin}>
+          <Text style={styles.buttonText}>Entrar</Text>
         </TouchableOpacity>
-      </View>
+        
+        <View style={styles.registerRow}>
+          <Text style={styles.text}>Não tem uma conta? </Text>
+          <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+            <Text style={styles.registerText}>Cadastre-se</Text>
+          </TouchableOpacity>
+        </View>
 
-      {/* Social Media Login Icons */}
-      <View style={styles.socialContainer}>
-        <TouchableOpacity style={styles.socialButton}>
-          <Icon name="google" size={30} color="#5E3B26" />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.socialButton}>
-          <Icon name="instagram" size={30} color="#5E3B26" />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.socialButton}>
-          <Icon name="facebook" size={30} color="#5E3B26" />
-        </TouchableOpacity>
+        {/* Ícones de login social */}
+        <View style={styles.socialContainer}>
+          <TouchableOpacity style={styles.socialButton}>
+            <Icon name="google" size={30} color="#fff" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.socialButton}>
+            <Icon name="instagram" size={30} color="#fff" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.socialButton}>
+            <Icon name="facebook" size={30} color="#fff" />
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'transparent', // Fundo transparente
-    padding: 15,
     justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  overlay: {
+    backgroundColor: 'rgba(0, 0, 0, 0.6)', 
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 20,
+    padding: 30,
+  },
+  backgroundImage: {
+    opacity: 0.8,
   },
   logo: {
     width: 130,
-    height: 50,
+    height: 200,
     resizeMode: 'contain',
+    marginBottom: 15,
   },
   title: {
     fontSize: 28,
-    color: '#5E3B26',
+    color: '#fff',
+    fontFamily: 'Poppins', 
     textAlign: 'center',
     marginBottom: 20,
   },
   input: {
-    backgroundColor: 'transparent', // Fundo transparente
-    paddingVertical: 12,
+    backgroundColor: 'transparent', 
+    paddingVertical: 15, 
     paddingHorizontal: 20,
     borderRadius: 30,
-    borderWidth: 2, // Borda colorida
-    borderColor: '#5E3B26', // Cor da borda
+    borderWidth: 2,
+    borderColor: '#e9a0b8',
     marginBottom: 15,
-    fontSize: 16,
-    color: '#363636',
+    fontSize: 18, 
+    color: '#fff', 
+    width: '100%', 
   },
   button: {
-    backgroundColor: '#5E3B26',
-    paddingVertical: 15,
+    backgroundColor: '#e9a0b8',
+    paddingVertical: 15, 
     borderRadius: 30,
     alignItems: 'center',
     marginBottom: 20,
+    width: '100%',
   },
   buttonText: {
     color: '#fff',
@@ -122,23 +151,24 @@ const styles = StyleSheet.create({
   registerRow: {
     flexDirection: 'row',
     justifyContent: 'center',
+    marginBottom: 30, 
   },
   text: {
-    color: '#333',
+    color: '#fff',
   },
   registerText: {
-    color: '#5E3B26',
+    color: '#e9a0b8',
     fontWeight: 'bold',
   },
   socialContainer: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    marginTop: 30,
+    marginTop: 20,
   },
   socialButton: {
     backgroundColor: 'transparent', 
     borderWidth: 2,
-    borderColor: '#5E3B26', 
+    borderColor: '#e9a0b8',
     width: 60,
     height: 60,
     borderRadius: 30,

@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity, ScrollView, ImageBackground } from 'react-native';
 
 export default function ExploreScreen({ navigation }) {
+
   const exploreItems = [
     {
       id: '1',
@@ -34,6 +35,10 @@ export default function ExploreScreen({ navigation }) {
     },
   ];
 
+  const handleCategoryPress = (categoryName) => {
+    navigation.navigate('CategoryDetails', { categoryName });
+  };
+
   const renderItem = ({ item }) => (
     <View style={styles.categoryCard}>
       <Text style={styles.sectionTitle}>{item.name}</Text>
@@ -48,29 +53,51 @@ export default function ExploreScreen({ navigation }) {
   );
 
   return (
-    <View style={styles.container}>
-      
-  
-      <Text style={styles.sectionTitle}>Explorar</Text>
-      <FlatList
-        data={exploreItems}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-        contentContainerStyle={styles.contentContainer}
-        showsVerticalScrollIndicator={false}
-      />
-      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-        <Text style={styles.backButtonText}>Voltar</Text>
-      </TouchableOpacity>
-    </View>
+    <ImageBackground 
+      source={{uri: 'https://i.pinimg.com/736x/e5/37/3e/e5373ee2006e669ce7443ba43e8a6fe8.jpg'}} // Link da imagem de fundo
+      style={styles.container}
+      imageStyle={styles.backgroundImage} // Estilo da imagem de fundo
+    >
+      <View style={styles.overlay}>
+        <Text style={styles.pageTitle}>Explorar</Text>
+        <FlatList
+          data={exploreItems}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id}
+          contentContainerStyle={styles.contentContainer}
+          showsVerticalScrollIndicator={false}
+        />
+        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+          <Text style={styles.backButtonText}>Voltar</Text>
+        </TouchableOpacity>
+      </View>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f9f7f7',
-    padding: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  overlay: {
+    flex: 1, 
+    width: '100%', 
+    padding: 30,
+    justifyContent: 'flex-start',
+  },
+  backgroundImage: {
+    opacity: 0.8,
+  },
+  pageTitle: {
+    fontSize: 28,
+    fontWeight: '700',
+    color: '#fff',
+    marginBottom: 16,
+    textAlign: 'center',
+    fontFamily: 'Poppins', // Fonte personalizada
   },
   contentContainer: {
     paddingBottom: 20, 
@@ -87,7 +114,7 @@ const styles = StyleSheet.create({
     textAlign: 'left',
   },
   categoryCard: {
-    backgroundColor: '#FFF',
+    backgroundColor: 'rgba(255, 255, 255, 0.85)', // Fundo branco translúcido para os cards
     borderRadius: 15,
     marginBottom: 20, 
     shadowColor: '#000',
@@ -97,7 +124,7 @@ const styles = StyleSheet.create({
     padding: 12,
   },
   imageCard: {
-    backgroundColor: '#FFF',
+    backgroundColor: 'transparent', // Fundo transparente para a imagem
     borderRadius: 15,
     marginRight: 15, 
     padding: 5,
@@ -117,7 +144,8 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     borderRadius: 10,
     alignItems: 'center',
-    marginTop: 10,
+    marginTop: 20,
+    width: '100%',
   },
   backButtonText: {
     color: '#fff',
