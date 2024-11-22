@@ -46,7 +46,7 @@ export default function LoginScreen({ navigation }) {
   
       if (response.data.length > 0) {
         Alert.alert('Bem-vindo!', `Olá, ${response.data[0].email}`);
-        navigation.navigate('Main');
+        navigation.navigate('Home');
       } else {
         Alert.alert('Erro', 'E-mail ou senha inválidos!');
       }

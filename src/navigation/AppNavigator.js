@@ -101,6 +101,7 @@ export default function AppNavigator() {
             headerShown: false,
         }}>
             <Stack.Screen name="Main" component={MainTabs} />
+            <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="Cadastro" component={RegisterScreen} />
             <Stack.Screen name="Explorar" component={ExploreScreen} />
