@@ -1,16 +1,15 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Ionicons } from '@expo/vector-icons';  // Importando os ícones
+import { Ionicons } from '@expo/vector-icons';
 import ExploreScreen from '../screens/Explore/ExploreScreen';
 import HomeScreen from '../screens/Home/HomeScreen';
 import NotificationsScreen from '../screens/Notification/NotificationsScreen';
 
 import PerfilSalao from '../screens/PerfilSalão';
 import LoginScreen from '../screens/Login/LoginScreen';
+import RegisterScreen from '../screens/Register/RegisterScreen';
 import AgendamentoScreen from '../screens/Agendamento/AgendamentoScreen';
-
-import RegisterScreen from '../screens/Cadastro/RegisterScreen';
 import CartScreen from '../screens/Cart/CartScreen';
 import FavoritesScreen from '../screens/Favoritos/FavoriteScreen';
 
