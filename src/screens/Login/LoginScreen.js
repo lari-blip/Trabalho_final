@@ -12,10 +12,12 @@ import {
 
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { useAuth } from '../../context';
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { login } = useAuth()
 
   const validateEmail = (email) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -46,7 +48,9 @@ export default function LoginScreen({ navigation }) {
   
       if (response.data.length > 0) {
         Alert.alert('Bem-vindo!', `Olá, ${response.data[0].email}`);
-        navigation.navigate('Main');
+        
+        console.log('teste')
+        navigation.navigate('Home');
       } else {
         Alert.alert('Erro', 'E-mail ou senha inválidos!');
       }
