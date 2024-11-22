@@ -23,6 +23,12 @@ function MainTabs() {
             screenOptions={{
                 tabBarActiveTintColor: '#e9a0b8',
                 tabBarInactiveTintColor: 'gray',
+                tabBarStyle: {
+                    height: 70, 
+                    paddingBottom: 10,
+                    paddingTop: 10,
+                    backgroundColor: '#fff',
+                },
             }}
         >
             <Tab.Screen
