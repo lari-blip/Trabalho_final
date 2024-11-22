@@ -30,6 +30,17 @@ const salons = [
 ];
 
 const HomeScreen = () => {
+  const navigation = useNavigation();
+
+  const handleSalonClick = (salonId) => {
+    const selectedSalon = salons.find((salon) => salon.id === salonId)
+
+  navigation.navigate('PerfilSalao',{
+    profileImage: selectedSalon.image,
+    profileName: selectedSalon.name,
+  })
+}
+
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
       {/* Logo */}
@@ -88,7 +99,11 @@ const HomeScreen = () => {
       <Text style={styles.sectionTitle}>Salões</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.salonScroll}>
         {salons.map((salon) => (
-          <TouchableOpacity key={salon.id} style={styles.salonCard}>
+          <TouchableOpacity
+          key={salon.id}
+          style={styles.salonCard}
+          onPress={() => handleSalonClick(salon.id)}
+          >
             <Image source={{ uri: salon.image }} style={styles.salonImage} />
             <Text style={styles.salonName}>{salon.name}</Text>
           </TouchableOpacity>
