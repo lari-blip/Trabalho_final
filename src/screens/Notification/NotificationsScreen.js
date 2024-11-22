@@ -1,6 +1,4 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { useIsFocused } from '@react-navigation/native';  // Hook para verificar se a tela está ativa
 import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, ImageBackground } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation, useIsFocused } from '@react-navigation/native';
@@ -18,9 +16,6 @@ const NotificationsScreen = () => {
   const navigation = useNavigation();
 
   return (
-    <View style={[styles.container, { backgroundColor: isFocused ? '#6F4F37' : '#6F4F37' }]}>
-      <Text style={styles.text}>Notifications Screen</Text>
-    </View>
     <ImageBackground
       source={{ uri: 'https://example.com/your-background-image.jpg' }} // Imagem de fundo
       style={styles.container}
@@ -63,10 +58,6 @@ const NotificationsScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   container: { flex: 1, padding: 20 },
   backgroundImage: { flex: 1 },
   contentContainer: { paddingBottom: 20 },
@@ -99,9 +90,6 @@ const styles = StyleSheet.create({
     color: '#4B4F56',
     marginBottom: 5,
   },
-  text: {
-    fontSize: 24,
-    color: '#6F4F37',
   notificationDate: {
     fontSize: 12,
     color: '#9b9b9b',

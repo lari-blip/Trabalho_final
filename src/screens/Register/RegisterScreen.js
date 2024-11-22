@@ -102,6 +102,7 @@ export default function RegisterScreen({ navigation }) {
           </TouchableOpacity>
         </View>
 
+        {/* Ícones de login social */}
         <View style={styles.socialContainer}>
           <TouchableOpacity style={styles.socialButton}>
             <Icon name="google" size={30} color="#fff" />
