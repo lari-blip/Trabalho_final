@@ -59,6 +59,7 @@ function MainTabs() {
             />
             <Tab.Screen
                 name="Cart"
+                name="Carr"
                 component={CartScreen}
                 options={{
                     tabBarIcon: ({ color, size }) => (
@@ -113,3 +114,4 @@ export default function AppNavigator() {
     );
 }
 
+}
