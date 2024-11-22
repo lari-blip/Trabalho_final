@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
 
 export default function ExploreScreen({ navigation }) {
+ 
   const exploreItems = [
     {
       id: '1',
@@ -34,14 +35,25 @@ export default function ExploreScreen({ navigation }) {
     },
   ];
 
+
+  const handleCategoryPress = (categoryName) => {
+
+    navigation.navigate('CategoryDetails', { categoryName });
+  };
+
+ 
   const renderItem = ({ item }) => (
     <View style={styles.categoryCard}>
       <Text style={styles.sectionTitle}>{item.name}</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {item.images.map((image, index) => (
-          <View style={styles.imageCard} key={index}>
+          <TouchableOpacity
+            style={styles.imageCard}
+            key={index}
+            onPress={() => handleCategoryPress(item.name)} 
+          >
             <Image source={{ uri: image }} style={styles.categoryImage} />
-          </View>
+          </TouchableOpacity>
         ))}
       </ScrollView>
     </View>
@@ -49,8 +61,6 @@ export default function ExploreScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-
-
       <Text style={styles.pageTitle}>Explorar</Text>
       <FlatList
         data={exploreItems}
@@ -70,46 +80,52 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f9f7f7',
-    padding: 15,
+    paddingHorizontal: 20,
+    paddingTop: 40,
+  },
+  pageTitle: {
+    fontSize: 28,
+    fontWeight: '700',
+    color: '#5E3B26',
+    marginBottom: 16,
+    textAlign: 'center',
+    opacity: 0,  
+    animation: 'fadeIn 1s ease-out forwards', 
   },
   contentContainer: {
     paddingBottom: 20,
   },
-  logoContainer: {
-    alignItems: 'center',
-    marginBottom: 20,
-  },
   sectionTitle: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: '600',
     color: '#5E3B26',
     marginBottom: 12,
     textAlign: 'left',
-
   },
   categoryCard: {
     backgroundColor: '#FFF',
     borderRadius: 15,
     marginBottom: 20,
+    padding: 16,
     shadowColor: '#000',
-    shadowOpacity: 0.15,
-    shadowRadius: 10,
-    shadowOffset: { width: 0, height: 3 },
-    padding: 12,
+    shadowOpacity: 0.1,
+    shadowRadius: 15,
+    shadowOffset: { width: 0, height: 5 },
+    elevation: 5,
   },
   imageCard: {
     backgroundColor: '#FFF',
     borderRadius: 15,
-    marginRight: 15,
-    padding: 5,
+    marginRight: 12,
+    overflow: 'hidden',
     shadowColor: '#000',
     shadowOpacity: 0.1,
-    shadowRadius: 8,
-    shadowOffset: { width: 0, height: 3 },
+    shadowRadius: 10,
+    shadowOffset: { width: 0, height: 4 },
   },
   categoryImage: {
-    width: 120,
-    height: 120,
+    width: 160,
+    height: 160,
     borderRadius: 12,
     resizeMode: 'cover',
   },
@@ -118,20 +134,11 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     borderRadius: 10,
     alignItems: 'center',
-    marginTop: 10,
+    marginTop: 20,
   },
   backButtonText: {
     color: '#fff',
     fontSize: 16,
     fontWeight: 'bold',
   },
-  pageTitle: {
-    fontSize: 25,
-    fontWeight: '600',
-    color: '#5E3B26',
-    marginBottom: 12,
-    textAlign: 'left',
-    marginTop: 80,
-    marginLeft:10,
-  }
 });

@@ -322,6 +322,8 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginBottom: 10,
         textAlign: 'center',
+        marginTop: 50,
+        marginBottom: 30,
     },
     profileImage: {
         width: 100,

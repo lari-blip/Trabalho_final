@@ -11,6 +11,7 @@ import AgendamentoScreen from '../screens/Agendamento/AgendamentoScreen';
 
 import RegisterScreen from '../screens/Cadastro/RegisterScreen';
 import CartScreen from '../screens/Cart/CartScreen';
+import FavoritesScreen from '../screens/Favoritos/FavoriteScreen';
 
 
 const Stack = createStackNavigator();
@@ -81,7 +82,7 @@ function MainTabs() {
 export default function AppNavigator() {
     return (
         <Stack.Navigator screenOptions={{
-            headerShown: false, // Oculta o cabeçalho do Stack.Navigator
+            headerShown: false,
         }}>
             <Stack.Screen name="Main" component={MainTabs} />
             <Stack.Screen name="Login" component={LoginScreen} />
@@ -89,6 +90,8 @@ export default function AppNavigator() {
             <Stack.Screen name="Explorar" component={ExploreScreen} />
             <Stack.Screen name="PerfilSalao" component={PerfilSalao} />
             <Stack.Screen name="Agendamento" component={AgendamentoScreen} />
+            <Stack.Screen name="Favoritos" component={FavoritesScreen } options={{ headerShown: false }}
+            />
         </Stack.Navigator>
     );
 }
