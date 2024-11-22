@@ -13,7 +13,6 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 
-// Dados de categorias e salões
 
 const categories = [
   { name: 'Unhas', image: 'https://i.pinimg.com/736x/85/f9/5d/85f95dfab5b4b80ccc9fae275c7bec5f.jpg' },
@@ -35,12 +34,9 @@ const salons = [
 
 const HomeScreen = () => {
   const navigation = useNavigation();
-  const [favorites, setFavorites] = useState(new Set()); 
-  const [scaleAnim] = useState(new Animated.Value(1)); 
   const [favorites, setFavorites] = useState(new Set());
   const [scaleAnim] = useState(new Animated.Value(1));
 
-  
   const toggleFavorite = (salonId) => {
     setFavorites((prevFavorites) => {
       const newFavorites = new Set(prevFavorites);
@@ -69,17 +65,6 @@ const HomeScreen = () => {
   };
 
   return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-      
-      <View style={styles.logoContainer}>
-        <Image source={{ uri: 'https://i.imgur.com/ULWXfpT.png' }} style={styles.logo} />
-      </View>
-
-    
-      <TextInput
-        style={styles.searchBar}
-        placeholder="Buscar serviços ou salões..."
-        placeholderTextColor="#9b9b9b"
     <ImageBackground
       source={{ uri: 'https://i.pinimg.com/736x/ce/0a/fb/ce0afb23a19a0de0341b3dc94c0343b9.jpg' }} 
       style={styles.container}
@@ -89,39 +74,6 @@ const HomeScreen = () => {
         
 
      
-      <View style={styles.headerIcons}>
-        <TouchableOpacity
-          style={styles.iconButton}
-          onPress={() => navigation.navigate('Favoritos',  { favorites })}
-        >
-          <Icon name="heart" size={24} color="#5E3B26" />
-          <Text style={styles.iconText}>Favoritos</Text>
-          <Text style={styles.favoriteCount}>{favorites.size}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.iconButton}>
-          <Icon name="history" size={24} color="#5E3B26" />
-          <Text style={styles.iconText}>Histórico</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.iconButton}>
-          <Icon name="calendar" size={24} color="#5E3B26" />
-          <Text style={styles.iconText}>Agenda</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.iconButton}>
-          <Icon name="users" size={24} color="#5E3B26" />
-          <Text style={styles.iconText}>Perfil</Text>
-        </TouchableOpacity>
-      </View>
-
-      
-      <Image source={{ uri: 'https://i.imgur.com/8bAKt9p.jpeg' }} style={styles.banner} />
-
-      
-      <Text style={styles.sectionTitle}>Categorias</Text>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.categoryScroll}>
-        {categories.map((category) => (
-          <TouchableOpacity key={category.name} style={styles.categoryCard}>
-            <Image source={{ uri: category.image }} style={styles.categoryImage} />
-            <Text style={styles.categoryText}>{category.name}</Text>
         <View style={styles.logoContainer}>
           <Image source={{ uri: 'https://i.imgur.com/ULWXfpT.png' }} style={styles.logo} />
         </View>
@@ -140,8 +92,6 @@ const HomeScreen = () => {
             
             />
           </TouchableOpacity>
-        ))}
-      </ScrollView>
           <TouchableOpacity style={styles.icon}>
             <Icon name="calendar" size={24} color="#4B4F56" />
           </TouchableOpacity>
@@ -153,35 +103,6 @@ const HomeScreen = () => {
           </TouchableOpacity>
         </View>
 
-   
-      <Text style={styles.sectionTitle}>Salões</Text>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.salonScroll}>
-        {salons.map((salon) => {
-          const isFavorite = favorites.has(salon.id);
-          return (
-            <View key={salon.id} style={styles.salonCard}>
-              <TouchableOpacity onPress={() => handleSalonClick(salon.id)}>
-                <Image source={{ uri: salon.image }} style={styles.salonImage} />
-              </TouchableOpacity>
-              <Text style={styles.salonName}>{salon.name}</Text>
-              <TouchableOpacity
-                onPress={() => {
-                  toggleFavorite(salon.id);
-                  animateHeart();
-                }}
-                style={styles.favoriteIcon}
-              >
-                <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
-                  <Icon
-                    name={isFavorite ? 'heart' : 'heart-o'}
-                    size={24}
-                    color={isFavorite ? '#e9a0b8' : '#4B4F56'}
-                  />
-                </Animated.View>
-              </TouchableOpacity>
-            </View>
-          );
-        })}
 
         <Text style={styles.sectionTitle}>Categorias</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.categoryScroll}>
@@ -223,13 +144,11 @@ const HomeScreen = () => {
           })}
         </ScrollView>
       </ScrollView>
-    </ScrollView>
     </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#F8F8F8', padding: 20 },
   container: { flex: 1, padding: 20 },
   backgroundImage: { opacity: 0.3 }, 
   contentContainer: { paddingBottom: 20 },
@@ -246,21 +165,9 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#333',
   },
-    height: 220, 
-    borderRadius: 15, 
-    marginBottom: 20 
-  },
-  sectionTitle: { 
-    fontSize: 22, 
-    fontWeight: '600', 
-    color: '#4B4F56', 
-    marginBottom: 15 
-  },
-  categoryScroll: { 
-    paddingVertical: 10 
-  },
+  sectionTitle: { fontSize: 22, fontWeight: '600', color: '#4B4F56', marginBottom: 15 },
+  categoryScroll: { paddingVertical: 10 },
   categoryCard: {
-    backgroundColor: '#FFF',
     backgroundColor: 'rgba(255, 255, 255, 0.8)', 
     borderRadius: 15,
     marginRight: 15,
@@ -270,36 +177,6 @@ const styles = StyleSheet.create({
     borderColor: '#ddd', 
     borderWidth: 1,
   },
-  categoryImage: { width: 100, 
-    height: 100, 
-    borderRadius: 15, 
-    marginBottom: 8 
-  },
-  categoryText: { 
-    fontSize: 14, 
-    color: '#4B4F56' 
-  },
-  salonScroll: { 
-    paddingVertical: 10 
-  },
-  salonCard: { 
-    width: 160, 
-    marginRight: 15
-  },
-  salonImage: { 
-    width: '100%', 
-    height: 100, 
-    borderRadius: 15, 
-    marginBottom: 10 
-  },
-  salonName: { 
-    fontSize: 16, 
-    fontWeight: '600', 
-    color: '#333', 
-    textAlign: 'center' 
-  },
-  favoriteIcon: { 
-    alignSelf: 'center' 
   categoryImage: { width: 100, height: 100, borderRadius: 15, marginBottom: 8 },
   categoryText: {
     fontSize: 14,
