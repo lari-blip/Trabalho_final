@@ -8,6 +8,7 @@ import { TextInput } from 'react-native';
 export default function PerfilSalao() {
     const navigation = useNavigation();
     const [followers, setFollowers] = useState(155);
+
     const [likes, setLikes] = useState([0, 0, 0]);
     const [comments, setComments] = useState([[], [], []]);
     const [commentingPostId, setCommentingPostId] = useState(null);
@@ -34,13 +35,14 @@ export default function PerfilSalao() {
         const updatedLikes = [...likes];
         updatedLikes[id] += 1;
         setLikes(updatedLikes);
-    };     
-         
-      const handleAddComment = (postId) => {
+    };
+
+    const handleAddComment = (postId) => {
         if (newComment.trim() === "") {
             Alert.alert("Por favor, escreva um comentário.");
             return;
         }
+
         const updatedComments = [...comments];
         updatedComments[postId].push(newComment);
         setComments(updatedComments);
@@ -108,7 +110,7 @@ export default function PerfilSalao() {
             </ScrollView>
 
             <Text style={styles.sectionTitle}>Posts</Text>
-           
+
             {posts.map((post, index) => (
                 <View key={post.id} style={styles.activityCard}>
                     <View style={styles.profileInfo}>
@@ -178,7 +180,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#f9f7f7',
-        padding: 16, 
+        padding: 16,
     },
     header: {
         alignItems: 'center',
@@ -200,7 +202,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginBottom: 16,
-    }, 
+    },
     statusBox: {
         alignItems: 'center',
         width: '30%',
@@ -267,14 +269,14 @@ const styles = StyleSheet.create({
         height: 180,
         borderRadius: 12,
         marginRight: 12,
-    },   
-    
+    },
+
     activityCard: {
         backgroundColor: '#F9F9F9',
         borderRadius: 10,
         padding: 10,
         marginBottom: 20,
-        marginTop: 20,       
+        marginTop: 20,
         elevation: 10,
         width: '500',
     },
@@ -360,5 +362,4 @@ const styles = StyleSheet.create({
         fontSize: 14,
         marginBottom: 5,
     },
-   
 });
