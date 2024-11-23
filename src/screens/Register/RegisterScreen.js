@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-export default function LoginScreen({ navigation }) {
+export default function RegisterScreen({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -22,7 +22,7 @@ export default function LoginScreen({ navigation }) {
     return regex.test(email);
   };
 
-  const handleLogin = async () => {
+  const handleRegister = async () => {
     if (!email || !password) {
       Alert.alert('Erro', 'Por favor, preencha todos os campos!');
       return;
@@ -34,27 +34,31 @@ export default function LoginScreen({ navigation }) {
     }
   
     try {
-      const response = await axios.get(
-        `https://6740e385d0b59228b7f1adeb.mockapi.io/users`,
+      const response = await axios.post(
+        'https://6740e385d0b59228b7f1adeb.mockapi.io/users',
         {
-          params: {
-            email: email,
-            password: password,
+          email: email,
+          password: password,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
           },
         }
       );
   
-      if (response.data.length > 0) {
-        Alert.alert('Bem-vindo!', `Olá, ${response.data[0].email}`);
-        navigation.navigate('Home');
+      if (response.status === 201) {
+        Alert.alert('Sucesso!', 'Conta criada com sucesso!');
+        navigation.navigate('Login');
       } else {
-        Alert.alert('Erro', 'E-mail ou senha inválidos!');
+        Alert.alert('Erro', 'Ocorreu um problema ao criar a conta.');
       }
     } catch (error) {
-      Alert.alert('Erro', 'Não foi possível conectar ao servidor.');
-      console.error(error);
+      console.error('Erro no registro:', error.response?.data || error.message);
+      Alert.alert('Erro', 'Não foi possível criar sua conta. Tente novamente mais tarde.');
     }
   };
+  
 
   return (
 
@@ -66,7 +70,7 @@ export default function LoginScreen({ navigation }) {
       <View style={styles.overlay}>
         <Image source={{uri: 'https://i.imgur.com/ULWXfpT.png'}} style={styles.logo} />
         
-        <Text style={styles.title}>Entrar</Text>
+        <Text style={styles.title}>Cadastrar</Text>
         
         <TextInput
           style={styles.input}
@@ -87,14 +91,14 @@ export default function LoginScreen({ navigation }) {
           maxLength={6}
         />
         
-        <TouchableOpacity style={styles.button} onPress={handleLogin}>
+        <TouchableOpacity style={styles.button} onPress={handleRegister}>
           <Text style={styles.buttonText}>Entrar</Text>
         </TouchableOpacity>
         
         <View style={styles.registerRow}>
-          <Text style={styles.text}>Não tem uma conta? </Text>
-          <TouchableOpacity onPress={() => navigation.navigate('Cadastro')}>
-            <Text style={styles.registerText}>Cadastre-se</Text>
+          <Text style={styles.text}>Possui uma conta? </Text>
+          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+            <Text style={styles.registerText}>Faça o Login</Text>
           </TouchableOpacity>
         </View>
 
@@ -158,7 +162,6 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     borderWidth: 2,
     borderColor: '#e9a0b8',
-    borderColor: '#F2AA7D',
     marginBottom: 15,
     fontSize: 18, 
     color: '#fff', 
@@ -166,7 +169,6 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#e9a0b8',
-    backgroundColor: '#F2AA7D',
     paddingVertical: 15, 
     borderRadius: 30,
     alignItems: 'center',
@@ -190,7 +192,6 @@ const styles = StyleSheet.create({
   },
   registerText: {
     color: '#e9a0b8',
-    color: '#F2AA7D',
 
     fontWeight: 'bold',
   },
@@ -204,7 +205,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent', 
     borderWidth: 2,
     borderColor: '#e9a0b8',
-    borderColor: '#F2AA7D',
 
     width: 60,
     height: 60,

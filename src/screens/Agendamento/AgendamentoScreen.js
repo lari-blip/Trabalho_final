@@ -279,16 +279,36 @@ export default function AgendamentoScreen() {
                 </View>
             ))}
 
-            <Text style={styles.title}>Informações do Perfil</Text>
-            <View style={styles.profileInfoContainer}>
-                <Text style={styles.profileInfoTitle}>Sobre nós:</Text>
-                <Text style={styles.profileInfoText}>
-                    Um salão com excelente atendimento e serviços de qualidade.
-                </Text>
-                <Text style={styles.profileInfoTitle}>Endereço:</Text>
-                <Text style={styles.profileInfoText}>
-                    Rua Exemplo, 123 - Centro
-                </Text>
+            <Image
+                source={{ uri: 'https://belezanatural.com.br/wp-content/themes/beleza-natural/template_assets/regua2.png' }}
+                style={styles.infoImage}
+            />
+            <View>
+                <Text style={styles.profileInfoTitle}>Redes Sociais 🌐</Text>
+                <TouchableOpacity>
+                    <Image
+                        source={{
+                            uri: 'https://belezanatural.com.br/wp-content/themes/beleza-natural/template_assets/banner_intagram_desktop.png',
+                        }}
+                        style={styles.socialImage}
+                    />
+                </TouchableOpacity>
+                <Text style={styles.title}>Informações do Perfil</Text>
+                <View style={styles.profileInfoContainer}>
+                    <View style={styles.infoCard}>
+                        <Text style={styles.profileInfoTitle}>Sobre nós: 🌟</Text>
+                        <Text style={styles.profileInfoText}>
+                            Um salão com excelente atendimento e serviços de qualidade.
+                        </Text>
+                    </View>
+                </View>
+                <View style={styles.infoCard}>
+                    <Text style={styles.profileInfoTitle}>Endereço: 📍</Text>
+                    <Text style={styles.profileInfoText}>
+                        CabeloCity, 123 - Centro
+                    </Text>
+                </View>
+
             </View>
         </ScrollView>
     );
@@ -304,6 +324,8 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginBottom: 10,
         textAlign: 'center',
+        marginTop: 50,
+        marginBottom: 30,
     },
     profileImage: {
         width: 100,
@@ -311,6 +333,7 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         marginBottom: 20,
         alignSelf: 'center',
+        justifyContent: 'center',
     },
     title: {
         fontSize: 24,
@@ -327,11 +350,6 @@ const styles = StyleSheet.create({
     },
     map: {
         flex: 1,
-    },
-    title: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginVertical: 8,
     },
     daysContainer: {
         flexDirection: 'row',
@@ -542,6 +560,48 @@ const styles = StyleSheet.create({
         color: '#333',
         marginBottom: 10,
     },
+    socialImage: {
+        width: 300,
+        height: 300,
+        resizeMode: 'contain',
+        marginVertical: 10,
+        left: 60,
+    },
+    profileInfoContainer: {
+        marginTop: 20,
+        paddingHorizontal: 16,
+    },
+    infoCard: {
+        backgroundColor: '#FFFFFF',
+        borderRadius: 10,
+        padding: 30,
+        marginBottom: 30,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        elevation: 3,
+        alignItems: 'center',
+    },
+    infoImage: {
+        left: -55,
+        width: 680,
+        height: '120',
+        marginBottom: 10,
+    },
+    profileInfoTitle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 5,
+        color: '#333',
+        textAlign: 'center',
+    },
+    profileInfoText: {
+        fontSize: 16,
+        color: '#555',
+        lineHeight: 24,
+        textAlign: 'center',
+    },
     profileInfo: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -628,16 +688,5 @@ const styles = StyleSheet.create({
     profileInfoContainer: {
         marginTop: 20,
         paddingHorizontal: 16,
-    },
-    profileInfoTitle: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginBottom: 5,
-    },
-    profileInfoText: {
-        fontSize: 16,
-        color: '#555',
-        marginBottom: 30,
-        lineHeight: 24,
     },
 });
