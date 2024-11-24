@@ -13,7 +13,6 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 
-
 const categories = [
   { name: 'Unhas', image: 'https://i.pinimg.com/736x/85/f9/5d/85f95dfab5b4b80ccc9fae275c7bec5f.jpg' },
   { name: 'Cabelos', image: 'https://i.pinimg.com/736x/02/ef/c5/02efc5d3011192f737d5dfdd34f49942.jpg' },
@@ -50,7 +49,7 @@ const HomeScreen = () => {
   };
 
   const animateHeart = () => {
-    Animated.sequence([
+    Animated.sequence([ 
       Animated.timing(scaleAnim, { toValue: 1.5, duration: 200, useNativeDriver: true }),
       Animated.timing(scaleAnim, { toValue: 1, duration: 200, useNativeDriver: true }),
     ]).start();
@@ -64,6 +63,10 @@ const HomeScreen = () => {
     });
   };
 
+  const handleCategoryClick = (categoryName) => {
+    navigation.navigate('Categoria', { categoryName });
+  };
+
   return (
     <ImageBackground
       source={{ uri: 'https://i.pinimg.com/736x/ce/0a/fb/ce0afb23a19a0de0341b3dc94c0343b9.jpg' }} 
@@ -72,25 +75,19 @@ const HomeScreen = () => {
     >
       <ScrollView contentContainerStyle={styles.contentContainer}>
         
-
-     
         <View style={styles.logoContainer}>
           <Image source={{ uri: 'https://i.imgur.com/ULWXfpT.png' }} style={styles.logo} />
         </View>
 
-        
         <TextInput
           style={styles.searchBar}
           placeholder="Buscar serviços ou salões..."
           placeholderTextColor="#9b9b9b"
         />
 
-         
-         <View style={styles.iconRow}>
+        <View style={styles.iconRow}>
           <TouchableOpacity style={styles.icon}>
-            <Icon name="heart" size={24} color="#4B4F56" 
-            
-            />
+            <Icon name="heart" size={24} color="#4B4F56" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.icon}>
             <Icon name="calendar" size={24} color="#4B4F56" />
@@ -103,11 +100,10 @@ const HomeScreen = () => {
           </TouchableOpacity>
         </View>
 
-
         <Text style={styles.sectionTitle}>Categorias</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.categoryScroll}>
           {categories.map((category) => (
-            <TouchableOpacity key={category.name} style={styles.categoryCard}>
+            <TouchableOpacity key={category.name} style={styles.categoryCard} onPress={() => handleCategoryClick(category.name)}>
               <Image source={{ uri: category.image }} style={styles.categoryImage} />
               <Text style={styles.categoryText}>{category.name}</Text>
             </TouchableOpacity>
