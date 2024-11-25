@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useRoute } from '@react-navigation/native';
 import { TextInput } from 'react-native';
 import { api } from '../../services/index';
-
+import ServiceCard from '../../components/ServiceCard';
 
 
 
@@ -103,6 +103,10 @@ export default function AgendamentoScreen() {
 
     const handleAction = (action) => {
         Alert.alert(action);
+    };
+
+    const handleServicePress = (service) => {
+        alert(`Você selecionou ${service.title}`);
     };
 
 
@@ -202,19 +206,15 @@ export default function AgendamentoScreen() {
                     <Text style={styles.actionButtonText}>Agendar</Text>
                 </TouchableOpacity>
             </View>
-          
+
             <Text style={styles.title}>Serviços em Destaque</Text>
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.servicesContainer}>
                 {services.map((service) => (
-                    <View key={service.id} style={styles.serviceCard}>
-                        {service.isPopular && <Text style={styles.popularTag}>Popular</Text>}
-                        {service.isNew && <Text style={styles.newTag}>Novo</Text>}
-                        <TouchableOpacity>
-                            <Image source={{ uri: service.image }} style={styles.serviceImage} />
-                            <Text style={styles.serviceTitle}>{service.title}</Text>
-                            <Text style={styles.servicePrice}>{service.price}</Text>
-                        </TouchableOpacity>
-                    </View>
+                    <ServiceCard
+                        key={service.id}
+                        service={service}
+                        onPress={() => handleServicePress(service)}
+                    />
                 ))}
             </ScrollView>
 
@@ -459,6 +459,7 @@ const styles = StyleSheet.create({
     servicesContainer: {
         marginBottom: 16,
         borderColor: '#8F2222FF',
+        padding: 10,
     },
     serviceCard: {
         width: 150,
