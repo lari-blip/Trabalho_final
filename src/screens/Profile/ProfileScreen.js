@@ -1,14 +1,16 @@
-// ProfileScreen.js
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { useIsFocused } from '@react-navigation/native';  // Hook para verificar se a tela está ativa
+import { useIsFocused } from '@react-navigation/native';
+import { useTheme } from '../../contexts/ThemeContext';
 
 const ProfileScreen = () => {
   const isFocused = useIsFocused();
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
 
   return (
-    <View style={[styles.container, { backgroundColor: isFocused ? 'blue' : 'white' }]}>
-      <Text style={styles.text}>Profile Screen</Text>
+    <View style={[styles.container, { backgroundColor: isFocused ? (isDark ? '#333' : 'blue') : (isDark ? '#121212' : 'white') }]}>
+      <Text style={[styles.text, { color: isDark ? '#fff' : 'black' }]}>Profile Screen</Text>
     </View>
   );
 };
@@ -21,7 +23,6 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 24,
-    color: 'white',
   },
 });
 

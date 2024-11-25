@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { useTheme } from '../../contexts/ThemeContext';
 
 const categories = [
     {
@@ -74,32 +75,33 @@ const categories = [
 
 const CategoriaScreen = ({ navigation, route }) => {
     const { categoryName } = route.params;
+    const { theme } = useTheme();
+    const isDark = theme === 'dark';
     const category = categories.find(cat => cat.name === categoryName);
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>{categoryName}</Text>
+        <View style={[styles.container, { backgroundColor: isDark ? '#121212' : '#f5f5f5' }]}>
+            <Text style={[styles.title, { color: isDark ? '#fff' : '#333' }]}>{categoryName}</Text>
             {category ? (
                 <View style={styles.imageContainer}>
                     <Image source={{ uri: category.image }} style={styles.categoryImage} />
                 </View>
             ) : (
-                <Text style={styles.errorText}>Categoria não encontrada</Text>
+                <Text style={[styles.errorText, { color: 'red' }]}>Categoria não encontrada</Text>
             )}
-            <Text style={styles.description}>Serviços disponíveis:</Text>
+            <Text style={[styles.description, { color: isDark ? '#bbb' : '#555' }]}>Serviços disponíveis:</Text>
             <ScrollView style={styles.servicesContainer}>
                 {category && category.services.map((service, index) => (
                     <TouchableOpacity
                         key={index}
-                        style={styles.serviceItem}
+                        style={[styles.serviceItem, { backgroundColor: isDark ? '#333' : '#fff' }]}
                         onPress={() => {
                             navigation.navigate('ServicoDetalhes', { category: service.name });
                         }}
                     >
                         <Image source={{ uri: service.image }} style={styles.serviceImage} />
-                        <Text style={styles.serviceText}>{service.name}</Text>
+                        <Text style={[styles.serviceText, { color: isDark ? '#fff' : '#333' }]}>{service.name}</Text>
                     </TouchableOpacity>
-
                 ))}
             </ScrollView>
         </View>
@@ -110,13 +112,11 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 20,
-        backgroundColor: '#f5f5f5',
     },
     title: {
         fontSize: 24,
         fontWeight: 'bold',
         marginBottom: 10,
-        color: '#333',
         textAlign: 'center',
         marginTop: -14,
     },
@@ -133,11 +133,9 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         marginBottom: 10,
-        color: '#555',
     },
     errorText: {
         fontSize: 16,
-        color: 'red',
         textAlign: 'center',
     },
     servicesContainer: {
@@ -147,7 +145,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         marginBottom: 15,
-        backgroundColor: '#fff',
         padding: 10,
         borderRadius: 10,
         shadowColor: '#000',
@@ -163,7 +160,6 @@ const styles = StyleSheet.create({
     },
     serviceText: {
         fontSize: 16,
-        color: '#333',
     },
 });
 

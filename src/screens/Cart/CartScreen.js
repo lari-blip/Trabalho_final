@@ -6,8 +6,13 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { Picker } from '@react-native-picker/picker';
 import { api } from '../../services/index';
 import { useFocusEffect } from '@react-navigation/native';
+import { useTheme } from '../../contexts/ThemeContext';
+
 
 const CartScreen = () => {
+    const { theme } = useTheme();
+    const isDark = theme === 'dark';
+
     const [selectedValue, setSelectedValue] = useState('opcao1');
     const [cart, setCart] = useState([]);
     const [discount, setDiscount] = useState(0);
@@ -25,17 +30,19 @@ const CartScreen = () => {
             const response = await api.get('/');
             const data = response.data.map((item) => ({
                 ...item,
-                quantity: item.quantity || 1, // Valor padrão caso a API não retorne
+                quantity: item.quantity || 1,
+
             }));
             setCart(data);
         } catch (error) {
             console.error('Erro ao buscar carrinho:', error.response?.data || error.message);
         }
     };
-    
-    useFocusEffect  (
+
+    useFocusEffect(
         React.useCallback(() => {
-            fetchCartData(); // Recarrega os dados sempre que a tela ganha foco
+            fetchCartData();
+
         }, [])
     );
     const calculateSubtotal = () => {
@@ -69,7 +76,8 @@ const CartScreen = () => {
         const newItem = {
             produto: 'Novo Produto',
             preco: 20.0,
-            quantity: 1, 
+            quantity: 1,
+
         };
 
         try {
@@ -84,7 +92,8 @@ const CartScreen = () => {
     const handleRemoveFromCart = async (item) => {
         try {
             await api.delete(`/${item.id}`);
-            await fetchCartData(); // Atualiza o carrinho após remover o item
+            await fetchCartData();
+
         } catch (error) {
             console.error('Erro ao remover item:', error.response?.data || error.message);
         }
@@ -109,26 +118,27 @@ const CartScreen = () => {
             Alert.alert('Erro ao finalizar compra', 'Ocorreu um erro ao tentar finalizar a compra. Tente novamente.');
         }
     };
-;
+
 
     return (
-        <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <ScrollView contentContainerStyle={[styles.scrollContainer, { backgroundColor: isDark ? '#121212' : '#f5f5f5' }]}>
             <View style={styles.logocontainer}>
-                <MaterialCommunityIcons name="cart-variant" size={80} color="black" />
+                <MaterialCommunityIcons name="cart-variant" size={80} color={isDark ? '#fff' : '#000'} />
             </View>
 
             <View style={styles.summaryhead}>
-                <Text style={styles.titlesummary}>Resumo</Text>
+                <Text style={[styles.titlesummary, { color: isDark ? '#fff' : '#333' }]}>Resumo</Text>
             </View>
 
             <View>
                 {cart.length === 0 ? (
-                    <Text style={styles.emptyCartText}>Carrinho vazio!</Text>
+                    <Text style={[styles.emptyCartText, { color: isDark ? '#fff' : '#999' }]}>Carrinho vazio!</Text>
                 ) : (
                     cart.map((item) => (
                         <CartItem
                             key={item.id}
-                            itemName={item.produto} // Ajustado para corresponder à API
+                            itemName={item.produto}
+
                             price={item.preco}
                             onRemove={() => handleRemoveFromCart(item)}
                         />
@@ -137,36 +147,36 @@ const CartScreen = () => {
             </View>
 
             <View style={styles.totalcontainerfather}>
-                <View style={styles.totalcontainer1}>
-                    <Text style={styles.boxvaluetittle}>Desconto</Text>
-                    <Text style={styles.boxvalue}>R$ {discount.toFixed(2)}</Text>
+                <View style={[styles.totalcontainer1, { backgroundColor: isDark ? '#333' : '#fff' }]}>
+                    <Text style={[styles.boxvaluetittle, { color: isDark ? '#fff' : '#333' }]}>Desconto</Text>
+                    <Text style={[styles.boxvalue, { color: isDark ? '#fff' : '#333' }]}>R$ {discount.toFixed(2)}</Text>
                 </View>
-                <View style={styles.totalcontainer2}>
-                    <Text style={styles.boxvaluetittle}>Total</Text>
-                    <Text style={styles.boxvalue}>R$ {calculateTotal().toFixed(2)}</Text>
+                <View style={[styles.totalcontainer2, { backgroundColor: isDark ? '#333' : '#fff' }]}>
+                    <Text style={[styles.boxvaluetittle, { color: isDark ? '#fff' : '#333' }]}>Total</Text>
+                    <Text style={[styles.boxvalue, { color: isDark ? '#fff' : '#333' }]}>R$ {calculateTotal().toFixed(2)}</Text>
                 </View>
             </View>
 
             <View style={styles.containercupom}>
                 <View style={styles.insertcupom}>
                     <TextInput
-                        style={styles.inputcupom}
+                        style={[styles.inputcupom, { backgroundColor: isDark ? '#333' : '#f9f9f9', color: isDark ? '#fff' : '#000' }]}
                         placeholder="Coloque o Cupom aqui"
-                        placeholderTextColor="#aaa"
+                        placeholderTextColor={isDark ? '#bbb' : '#aaa'}
                         value={couponInput}
                         onChangeText={setCouponInput}
                     />
-                    <TouchableOpacity style={styles.buttonCupom} onPress={handleApplyCoupon}>
+                    <TouchableOpacity style={[styles.buttonCupom, { backgroundColor: isDark ? '#e9a0b8' : '#F2AA7D' }]} onPress={handleApplyCoupon}>
                         <Text style={styles.buttonCupomText}>Aplicar</Text>
                     </TouchableOpacity>
                 </View>
             </View>
 
             <View style={styles.methodcontainer}>
-                <Text style={styles.titlesummary}>Selecione uma opção:</Text>
+                <Text style={[styles.titlesummary, { color: isDark ? '#fff' : '#333' }]}>Selecione uma opção:</Text>
                 <Picker
                     selectedValue={selectedValue}
-                    style={styles.inputmetodo}
+                    style={[styles.inputmetodo, { color: isDark ? '#fff' : '#000' }]}
                     onValueChange={(itemValue) => setSelectedValue(itemValue)}
                 >
                     <Picker.Item label="Pix" value="opcao1" />
@@ -176,13 +186,15 @@ const CartScreen = () => {
             </View>
 
             <View style={styles.finishContainer}>
-                <TouchableOpacity style={styles.buttonFinish} onPress={handleFinalizePurchase}>
+                <TouchableOpacity style={[styles.buttonFinish, { backgroundColor: isDark ? '#e9a0b8' : '#F2AA7D' }]} onPress={handleFinalizePurchase}>
+
                     <Text style={styles.buttonFinishText}>Finalizar</Text>
                 </TouchableOpacity>
             </View>
 
             <View style={styles.addButtonContainer}>
-                <TouchableOpacity style={styles.addButton} onPress={fetchCartData}>
+                <TouchableOpacity style={[styles.addButton, { backgroundColor: isDark ? '#e9a0b8' : '#F2AA7D' }]} onPress={fetchCartData}>
+
                     <Text style={styles.addButtonText}>Atualizar Carrinho</Text>
                 </TouchableOpacity>
             </View>
@@ -207,7 +219,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingHorizontal: 20,
         paddingVertical: 0,
-
     },
     button: {
         paddingVertical: 4,
@@ -311,7 +322,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 80,
         marginBottom: 10,
-
     },
     addButtonContainer: {
         alignItems: 'center',
@@ -335,7 +345,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginVertical: 20,
     },
-
 
 });
 

@@ -17,7 +17,6 @@ export default function PerfilSalao() {
 
     return (
         <ScrollView style={styles.container}>
-            {/* Header with Image and Title */}
             <View style={styles.header}>
                 <Image
                     source={{ uri: 'https://i.imgur.com/LMaopsx.jpeg' }}
@@ -26,7 +25,6 @@ export default function PerfilSalao() {
                 <Text style={styles.title}>Beleza Total</Text>
             </View>
 
-            {/* Followers, Following, Services Status */}
             <View style={styles.statusContainer}>
                 <View style={styles.statusBox}>
                     <Text style={styles.statusNumber}>{followers}</Text>
@@ -42,7 +40,6 @@ export default function PerfilSalao() {
                 </View>
             </View>
 
-            {/* Follow and Schedule Buttons */}
             <View style={styles.buttonContainer}>
                 <TouchableOpacity style={styles.buttonFollow} onPress={handleFollow}>
                     <MaterialIcons name="favorite" size={20} color="#fff" />
@@ -55,7 +52,6 @@ export default function PerfilSalao() {
                 </TouchableOpacity>
             </View>
 
-            {/* Categorias Section */}
             <Text style={styles.sectionTitle}>Categorias</Text>
             <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.scrollHorizontal}>
                 <Image style={styles.categoryImage} source={{ uri: 'https://img.freepik.com/vetores-gratis/mulher-com-icone-de-cabelo-comprido_1308-127889.jpg' }} />
@@ -63,7 +59,6 @@ export default function PerfilSalao() {
                 <Image style={styles.categoryImage} source={{ uri: 'https://img.myloview.com.br/quadros/olhos-com-sobrancelha-e-cilios-longos-e-pincas-para-construir-logotipo-para-sobrancelha-mater-sobrancelha-de-extensao-de-cilios-ilustracao-do-vetor-700-108407122.jpg' }} />
             </ScrollView>
 
-            {/* Fotos Section */}
             <Text style={styles.sectionTitle}>Fotos</Text>
             <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.scrollHorizontal}>
                 <Image style={styles.photoImage} source={{ uri: 'https://i.pinimg.com/236x/7b/51/80/7b5180e1dd9b4e3ef8efc004af09c48b.jpg' }} />
@@ -71,7 +66,6 @@ export default function PerfilSalao() {
                 <Image style={styles.photoImage} source={{ uri: 'https://i.pinimg.com/564x/05/87/66/058766173fa204420c5dad86f6d73b6c.jpg' }} />
             </ScrollView>
 
-            {/* Posts Section (Empty for now) */}
             <Text style={styles.sectionTitle}>Posts</Text>
         </ScrollView>
     );
@@ -81,7 +75,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#f9f7f7',
-        padding: 16, // Ajuste o padding para um melhor espaçamento
+        padding: 16,
     },
     header: {
         alignItems: 'center',
@@ -102,11 +96,11 @@ const styles = StyleSheet.create({
     statusContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginBottom: 16, // Reduzi o espaço entre as informações de status
+        marginBottom: 16,
     },
     statusBox: {
         alignItems: 'center',
-        width: '30%', // Ajustei a largura dos boxes para um visual mais balanceado
+        width: '30%',
     },
     statusNumber: {
         fontSize: 18,

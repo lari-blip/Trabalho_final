@@ -3,6 +3,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import AppNavigator from './src/navigation/AppNavigator';
 import NetInfo from '@react-native-community/netinfo';
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { ThemeProvider } from './src/contexts/ThemeContext';
+
 
 const NoInternetScreen = ({ onRetry }) => (
     <View style={styles.noInternetContainer}>
@@ -17,16 +19,16 @@ export default function App() {
     const [isConnected, setIsConnected] = useState(true);
 
     useEffect(() => {
-        // Verifica o status da conexão com a internet
+
         const unsubscribe = NetInfo.addEventListener((state) => {
             setIsConnected(state.isConnected);
         });
 
-        return () => unsubscribe(); // Limpa o listener quando o componente é desmontado
+        return () => unsubscribe();
     }, []);
 
     const handleRetry = () => {
-        // Tenta verificar novamente a conexão
+
         NetInfo.fetch().then((state) => {
             setIsConnected(state.isConnected);
         });
@@ -37,9 +39,11 @@ export default function App() {
     }
 
     return (
-        <NavigationContainer>
-            <AppNavigator />
-        </NavigationContainer>
+        <ThemeProvider>
+            <NavigationContainer>
+                <AppNavigator />
+            </NavigationContainer>
+        </ThemeProvider>
     );
 }
 

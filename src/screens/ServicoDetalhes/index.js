@@ -1,8 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
-
+import { useTheme } from '../../contexts/ThemeContext';
 const ServicoDetalhesScreen = ({ route, navigation }) => {
     const { category } = route.params;
+    const { theme } = useTheme();
+    const isDark = theme === 'dark';
 
     const services = {
         Manicure: [
@@ -17,7 +19,7 @@ const ServicoDetalhesScreen = ({ route, navigation }) => {
             { name: 'Manicure: Express', price: 'R$ 120.00', stars: 3, image: 'https://i.pinimg.com/736x/80/28/a0/8028a02300c9b6aa2aaece767b607bf0.jpg', address: 'Rua Rápida, 606', hours: '10:00 - 17:00', description: 'Descrição do serviço de Manicure: Express.' },
             { name: 'Manicure: Rê e Nata', price: 'R$ 120.00', stars: 5, image: 'https://i.pinimg.com/736x/4a/9a/9c/4a9a9c7435bc2ba21546c52c7476e6f1.jpg', address: 'Rua Tendência, 707', hours: '9:00 - 20:00', description: 'Descrição do serviço de Manicure: Rê e Nata.' },
         ],
-        
+
         Pedicure: [
             { name: 'Pedicure: Beleza Total', price: 'R$ 120.00', stars: 5, image: 'https://i.pinimg.com/736x/b4/57/7b/b4577b4d9f37195b3d2d53a7e1f7e7bf.jpg', address: 'Rua Exemplo, 456', hours: '10:00 - 19:00', description: 'Descrição do serviço de Pedicure: Beleza Total.' },
             { name: 'Pedicure: Glamour Estética', price: 'R$ 120.00', stars: 3, image: 'https://i.pinimg.com/736x/06/21/5b/06215b3cf0dacf7ac3c394fd2ccff2a4.jpg', address: 'Rua Exemplo, 789', hours: '8:00 - 17:00', description: 'Descrição do serviço de Pedicure: Glamour Estética.' },
@@ -30,7 +32,7 @@ const ServicoDetalhesScreen = ({ route, navigation }) => {
             { name: 'Pedicure: Unhas de Gel', price: 'R$ 120.00', stars: 5, image: 'https://i.pinimg.com/736x/f7/8d/62/f78d6256af5705ec22730d13f7037a7f.jpg', address: 'Rua Tendência, 707', hours: '9:00 - 20:00', description: 'Descrição do serviço de Pedicure: Unhas de Gel.' },
             { name: 'Pedicure: Detox dos Pés', price: 'R$ 120.00', stars: 4, image: 'https://i.pinimg.com/736x/11/9c/79/119c79d85456d120dd3dbe45b0be8c00.jpg', address: 'Rua Equilíbrio, 808', hours: '8:00 - 19:00', description: 'Descrição do serviço de Pedicure: Detox dos Pés.' },
         ],
-        
+
         Decoradas: [
             { name: 'Unhas Decoradas: Beleza Total', price: 'R$ 120.00', stars: 5, image: 'https://i.pinimg.com/736x/9d/b7/2d/9db72d93a6947555529249a690c0554e.jpg', address: 'Rua Exemplo, 456', hours: '10:00 - 19:00', description: 'Descrição do serviço de Unhas Decoradas: Beleza Total.' },
             { name: 'Unhas Decoradas: Glamour Estética', price: 'R$ 120.00', stars: 3, image: 'https://i.pinimg.com/736x/23/36/b2/2336b2cbcd9c9ea8203e8eb41790604b.jpg', address: 'Rua Exemplo, 789', hours: '8:00 - 17:00', description: 'Descrição do serviço de Unhas Decoradas: Glamour Estética.' },
@@ -58,7 +60,6 @@ const ServicoDetalhesScreen = ({ route, navigation }) => {
             ],
         Extensão: [
             { name: 'Alongamento de Unhas: Beleza Total', price: 'R$ 120', stars: 5, image: 'https://i.pinimg.com/736x/16/53/52/165352e4881c2dfc88f5fc8bc80ee0b1.jpg', address: 'Rua Exemplo, 456', hours: '10:00 - 19:00', description: 'Descrição do serviço de Alongamento de Unhas: Beleza Total.' },
-            { name: 'Alongamento de Unhas: Glamour Estética',price: 'R$ 120.00', stars: 4, image: 'https://i.pinimg.com/736x/56/27/2c/56272c8e860a964451fc76fe7d06d91e.jpg', address: 'Rua Exemplo, 789', hours: '8:00 - 17:00', description: 'Descrição do serviço de Alongamento de Unhas: Glamour Estética.' },
             { name: 'Alongamento de Unhas: Estilo Sofisticado', price: 'R$ 120.00', stars: 5, image: 'https://i.pinimg.com/736x/68/5e/51/685e51c79434829bf88452de2e2b7df8.jpg', address: 'Rua Elegante, 101', hours: '9:00 - 19:00', description: 'Descrição do serviço de Alongamento de Unhas: Estilo Sofisticado.' },
             { name: 'Alongamento de Unhas: Fashion Nails', price: 'R$ 120.00', stars: 5, image: 'https://i.pinimg.com/736x/b6/55/a0/b655a034d4c76869b3251db5b223e514.jpg', address: 'Rua Fashion, 202', hours: '10:00 - 18:00', description: 'Descrição do serviço de Alongamento de Unhas: Fashion Nails.' },
             { name: 'Alongamento de Unhas: Unhas Super Longas', price: 'R$ 120.00', stars: 5, image: 'https://i.pinimg.com/736x/dd/20/16/dd2016648d5c33ebb12359d609f3ed3e.jpg', address: 'Rua Longa, 303', hours: '9:30 - 18:30', description: 'Descrição do serviço de Alongamento de Unhas: Unhas Super Longas.' },
@@ -165,6 +166,7 @@ const ServicoDetalhesScreen = ({ route, navigation }) => {
             { name: 'Micropigmentação de Sobrancelhas: Fio a Fio e Sombra', price: 'R$ 120.00', stars: 5, image: 'https://i.pinimg.com/736x/df/1e/ad/df1eadbe98fb78f379d5ee750ce15f04.jpg', address: 'Rua Elegante, 808', hours: '9:00 - 19:00', description: 'Descrição do serviço de Micropigmentação de Sobrancelhas: Fio a Fio e Sombra.' },
         ],
         Microblading: [
+
             { name: 'Microblading: Fio a Fio',price: 'R$ 120.00', stars: 5, image: 'https://i.pinimg.com/736x/76/4f/36/764f360fd8365fc2e43b73fb50839916.jpg', address: 'Rua Exemplo, 456', hours: '9:00 - 18:00', description: 'Descrição do serviço de Microblading: Fio a Fio.' },
             { name: 'Microblading: Design Completo', price: 'R$ 120.00', stars: 5, image: 'https://i.pinimg.com/736x/97/c2/08/97c20843a188e767209dfe8728227ddf.jpg', address: 'Rua Estilo, 789', hours: '10:00 - 19:00', description: 'Descrição do serviço de Microblading: Design Completo.' },
             { name: 'Microblading: Fios Naturais e Definição', price: 'R$ 120.00', stars: 4, image: 'https://i.pinimg.com/736x/cf/de/46/cfde46a85147520e9d76ce545a983036.jpg', address: 'Rua Beleza, 101', hours: '9:00 - 18:00', description: 'Descrição do serviço de Microblading: Fios Naturais e Definição.' },
@@ -225,6 +227,7 @@ const ServicoDetalhesScreen = ({ route, navigation }) => {
             { name: 'Maquiagem Casamento: Maquiagem para Mini Wedding', price: 'R$ 120.00', stars: 5, image: 'https://i.pinimg.com/736x/33/26/a5/3326a5f74cbba5be63acc1782fb8fbb0.jpg', address: 'Rua Elegante, 808', hours: '9:00 - 19:00', description: 'Descrição do serviço de Maquiagem Casamento: Maquiagem para Mini Wedding.' },
         ],
         Infantil: [
+
             { name: 'Maquiagem Infantil: Festa de Aniversário',price: 'R$ 120.00', stars: 5, image: 'https://i.pinimg.com/736x/9b/49/1a/9b491a6555dc8fc0a0cd67ac02b5d15c.jpg', address: 'Rua Exemplo, 456', hours: '9:00 - 18:00', description: 'Descrição do serviço de Maquiagem Infantil: Festa de Aniversário.' },
             { name: 'Maquiagem Infantil: Maquiagem para Bailinho', price: 'R$ 120.00', stars: 5, image: 'https://i.pinimg.com/736x/b7/08/b4/b708b4a802ce1a04cb2e6fe3346d02a9.jpg', address: 'Rua Estilo, 789', hours: '10:00 - 19:00', description: 'Descrição do serviço de Maquiagem Infantil: Maquiagem para Bailinho.' },
             { name: 'Maquiagem Infantil: Maquiagem para Carnaval', price: 'R$ 120.00', stars: 5, image: 'https://i.pinimg.com/736x/e7/39/8e/e7398e68c49a24f7d2a1bf0722d70ee0.jpg', address: 'Rua Beleza, 101', hours: '9:00 - 17:00', description: 'Descrição do serviço de Maquiagem Infantil: Maquiagem para Carnaval.' },
@@ -262,6 +265,7 @@ const ServicoDetalhesScreen = ({ route, navigation }) => {
             { name: 'Barba: Pintura Completa', price: 'R$ 120.00', stars: 5, image: 'https://i.pinimg.com/736x/af/ab/9a/afab9a6b5d2f157e079c5426ee736ad4.jpg', address: 'Rua Simetria, 707', hours: '9:00 - 18:00', description: 'Descrição do serviço de Barba: Pintura Completa.' },
         ],
         HotTowelShave: [
+
             { name: 'Barba: Hot Towel Shave Clássico',price: 'R$ 120.00', stars: 5, image: 'https://i.pinimg.com/736x/ba/57/a4/ba57a41520c8d48d8aee504e704614bb.jpg', address: 'Rua Exemplo, 123', hours: '9:00 - 18:00', description: 'Descrição do serviço de Barba: Hot Towel Shave Clássico.' },
             { name: 'Barba: Hot Towel Shave Premium', price: 'R$ 120.00', stars: 5, image: 'https://i.pinimg.com/736x/16/3d/32/163d321c012038c8b7f5a4bb1415b15f.jpg', address: 'Rua Estilo, 456', hours: '10:00 - 19:00', description: 'Descrição do serviço de Barba: Hot Towel Shave Premium.' },
             { name: 'Barba: Hot Towel Shave Relax',price: 'R$ 120.00', stars: 4, image: 'https://i.pinimg.com/736x/d5/90/39/d590393cebdf0bcc2bce6fdea0baf4ca.jpg', address: 'Rua Elegante, 606', hours: '9:00 - 19:00', description: 'Descrição do serviço de Barba: Hot Towel Shave Relax.' },
@@ -275,6 +279,7 @@ const ServicoDetalhesScreen = ({ route, navigation }) => {
             { name: 'Aromaterapia: Equilíbrio Energético', price: 'R$ 120.00', stars: 5, image: 'https://i.pinimg.com/736x/fe/93/e5/fe93e551f05c7d4d5f0855fb05d7fbe5.jpg', address: 'Rua Harmonia, 202', hours: '9:00 - 18:00', description: 'Aromas específicos para equilibrar as energias do corpo e da mente, proporcionando sensação de equilíbrio.' },
             { name: 'Aromaterapia: Antidepressiva', price: 'R$ 120.00', stars: 4, image: 'https://i.pinimg.com/736x/81/8b/f6/818bf692f7778950def716c6c6e4ecd8.jpg', address: 'Rua Paz, 303', hours: '10:00 - 19:00', description: 'Terapia aromática com óleos que ajudam a aliviar sintomas de depressão e promovem sensação de felicidade.' },
         ],
+
             HotStone: [
                 { name: 'Hot Stone: Terapia Relaxante', price: 'R$ 120.00', stars: 5, image: 'https://i.pinimg.com/736x/de/e6/71/dee67169f7f102bba0fa69f5f814aba8.jpg', address: 'Rua Tranquilidade, 123', hours: '9:00 - 18:00', description: 'Massagem com pedras quentes para relaxar os músculos e aliviar o estresse.' },
                 { name: 'Hot Stone: Equilíbrio Energético', price: 'R$ 120.00', stars: 4, image: 'https://i.pinimg.com/736x/4a/44/89/4a448966b91739e435feaf2024771123.jpg', address: 'Rua Bem-Estar, 456', hours: '10:00 - 19:00', description: 'Terapia com pedras quentes que ajudam a equilibrar a energia do corpo e mente.' },
@@ -288,20 +293,20 @@ const ServicoDetalhesScreen = ({ route, navigation }) => {
     const selectedServices = services[category] || [];
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, { backgroundColor: isDark ? '#121212' : '#f5f5f5' }]}>
             <ScrollView contentContainerStyle={styles.scrollContainer}>
                 {selectedServices.length > 0 ? (
                     <View style={styles.servicesGrid}>
                         {selectedServices.map((provider, index) => (
                             <TouchableOpacity
                                 key={index}
-                                style={styles.providerContainer}
+                                style={[styles.providerContainer, { backgroundColor: isDark ? '#333' : '#fff' }]}
                                 onPress={() => navigation.navigate('ServiceDetail', { service: provider })}
                             >
                                 <Image source={{ uri: provider.image }} style={styles.providerImage} />
-                                <Text style={styles.providerName}>{provider.name}</Text>
-                                <Text style={styles.price}>Preço: {provider.price}</Text>
-                                <Text style={styles.stars}>Avaliação: {'★'.repeat(provider.stars)}{'☆'.repeat(5 - provider.stars)}</Text>
+                                <Text style={[styles.providerName, { color: isDark ? '#fff' : '#333' }]}>{provider.name}</Text>
+                                <Text style={[styles.price, { color: isDark ? '#bbb' : '#333' }]}>Preço: {provider.price}</Text>
+                                <Text style={[styles.stars, { color: isDark ? '#ffd700' : '#f39c12' }]}>Avaliação: {'★'.repeat(provider.stars)}{'☆'.repeat(5 - provider.stars)}</Text>
                             </TouchableOpacity>
                         ))}
                     </View>
@@ -317,7 +322,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 20,
-        backgroundColor: '#f5f5f5',
     },
     scrollContainer: {
         paddingBottom: 20,
@@ -328,7 +332,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     providerContainer: {
-        backgroundColor: '#fff',
         borderRadius: 10,
         padding: 15,
         marginBottom: 20,
@@ -351,12 +354,10 @@ const styles = StyleSheet.create({
     },
     price: {
         fontSize: 14,
-        color: '#333',
         marginBottom: 5,
     },
     stars: {
         fontSize: 14,
-        color: '#f39c12',
     },
     errorText: {
         fontSize: 18,

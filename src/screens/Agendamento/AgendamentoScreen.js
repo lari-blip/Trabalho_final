@@ -5,7 +5,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { useRoute } from '@react-navigation/native';
 import { TextInput } from 'react-native';
-import { api } from '../../services/index'; 
+import { api } from '../../services/index';
+
 
 
 
@@ -52,14 +53,7 @@ export default function AgendamentoScreen() {
         setLikes(updatedLikes);
     };
 
-    /**
-     * Adiciona um comentário ao post
-     * 
-     * @param {number} postId - ID do post que recebeu o comentário
-     * 
-     * Função que verifica se o comentário não está vazio e o adiciona ao estado dos comentários.
-     * Caso o campo de comentário esteja vazio, exibe um alerta.
-     */
+
     const handleAddComment = (postId) => {
         if (newComment.trim() === "") {
             Alert.alert("Por favor, escreva um comentário.");
@@ -111,7 +105,7 @@ export default function AgendamentoScreen() {
         Alert.alert(action);
     };
 
-    
+
     const handleAddToCart = async () => {
         const newItem = {
             produto: 'Novo Horario Agendado',
@@ -119,7 +113,8 @@ export default function AgendamentoScreen() {
         };
 
         try {
-            await api.post('/', newItem); 
+            await api.post('/', newItem);
+
             Alert.alert('Horario adicionado ao carrinho!');
 
 
