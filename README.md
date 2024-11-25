@@ -74,6 +74,72 @@
 
 ###
 
+<h2 align="left">Contribuidores</h2>
+
+###
+
+<h4 align="left">Eric<br>git: https://github.com/ericsilva0309</h4>
+
+###
+
+<div align="center">
+  <img height="200" src="https://i.imgur.com/d3Ays4W.jpeg"  />
+</div>
+
+###
+
+<h4 align="left">João Casadinho<br>git: https://github.com/joao123alt</h4>
+
+###
+
+<div align="center">
+  <img height="200" src="https://i.imgur.com/pedfTk8.jpeg"  />
+</div>
+
+###
+
+<h4 align="left">Larissa<br>git: https://github.com/lari-blip</h4>
+
+###
+
+<div align="center">
+  <img height="200" src="https://i.imgur.com/voss7YZ.jpeg"  />
+</div>
+
+###
+
+<h4 align="left">Mariana<br>git: https://github.com/MariPuri5</h4>
+
+###
+
+<div align="center">
+  <img height="200" src="https://i.imgur.com/KeSx7bg.jpeg"  />
+</div>
+
+###
+
+<h4 align="left">Marcos<br>git: https://github.com/marcos-medeirosx</h4>
+
+###
+
+<div align="center">
+  <img height="200" src="https://i.imgur.com/klYh22E.jpeg"  />
+</div>
+
+###
+
+<h2 align="left">Techs</h2>
+
+###
+
+<div align="left">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" height="40" alt="javascript logo"  />
+  <img width="12" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" height="40" alt="react logo"  />
+</div>
+
+###
+
 <h3 align="left">💇‍♀️ Agenda Virtual de Salão de Beleza - Simplificando sua rotina de cuidados pessoais!</h3>
 
 ###
