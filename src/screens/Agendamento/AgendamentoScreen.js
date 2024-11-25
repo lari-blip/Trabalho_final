@@ -5,6 +5,9 @@ import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { useRoute } from '@react-navigation/native';
 import { TextInput } from 'react-native';
+import { api } from '../../services/index'; 
+
+
 
 export default function AgendamentoScreen() {
     const [likes, setLikes] = useState([0, 0, 0]);
@@ -108,6 +111,26 @@ export default function AgendamentoScreen() {
         Alert.alert(action);
     };
 
+    
+    const handleAddToCart = async () => {
+        const newItem = {
+            produto: 'Novo Horario Agendado',
+            preco: 120.0,
+        };
+
+        try {
+            await api.post('/', newItem); 
+            Alert.alert('Horario adicionado ao carrinho!');
+
+
+        } catch (error) {
+            console.error('Erro ao adicionar item:', error.response?.data || error.message);
+            Alert.alert('Erro ao adicionar', 'Não foi possível adicionar o item.');
+        }
+    };
+
+
+
     return (
         <ScrollView style={styles.container}>
             <Text style={styles.salonName}>{profileName}</Text>
@@ -180,11 +203,11 @@ export default function AgendamentoScreen() {
                 <TouchableOpacity onPress={() => navigation.navigate('PerfilSalao')} style={styles.actionButtonOutline}>
                     <Text style={styles.actionButtonTextOutline}>Ver Perfil</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => handleAction('Agendar Horário')} style={styles.actionButton}>
-                    <Text style={styles.actionButtonText}>Agendar Horário</Text>
+                <TouchableOpacity onPress={handleAddToCart} style={styles.actionButton}>
+                    <Text style={styles.actionButtonText}>Agendar</Text>
                 </TouchableOpacity>
             </View>
-
+          
             <Text style={styles.title}>Serviços em Destaque</Text>
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.servicesContainer}>
                 {services.map((service) => (
