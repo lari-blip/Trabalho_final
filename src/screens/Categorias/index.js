@@ -40,7 +40,6 @@ const categories = [
         services: [
             { name: 'Alongamento', image: 'https://i.pinimg.com/736x/c9/7f/84/c97f84e01722fb6ea967849bfd3d66c3.jpg' },
             { name: 'Lifting', image: 'https://i.pinimg.com/736x/c7/51/a9/c751a9e853890cd47dd7773e02c1ba91.jpg' },
-            { name: 'Coloração', image: 'https://i.pinimg.com/736x/78/4e/63/784e637ffa1aeefdca1cc8da2e8b478b.jpg' },
             { name: 'Postiços', image: 'https://i.pinimg.com/736x/ac/2c/dd/ac2cddd2ab6e837441a8b8079f186485.jpg' },
         ],
     },
@@ -60,10 +59,8 @@ const categories = [
         services: [
             { name: 'Navalhada', image: 'https://i.pinimg.com/736x/51/49/26/514926a9cd60b701f020bd6b432803ba.jpg' },
             { name: 'Alisamento', image: 'https://i.pinimg.com/736x/56/72/a8/5672a8c39c81ec78e77ed239286aa6f4.jpg' },
-            { name: 'Pintura', image: 'https://i.pinimg.com/736x/44/1d/4e/441d4e623382856daf4198084ad69741.jpg' },
+            { name: 'Tintura', image: 'https://i.pinimg.com/736x/44/1d/4e/441d4e623382856daf4198084ad69741.jpg' },
             { name: 'HotTowelShave', image: 'https://i.pinimg.com/736x/55/02/09/550209bfb3c4a9dab07ec9cc92cb0d64.jpg' },
-            { name: 'Clássico', image: 'https://i.pinimg.com/736x/aa/e7/3e/aae73ecd1adeecc12755abbe8f5b8484.jpg' },
-            { name: 'Desenhada', image: 'https://i.pinimg.com/736x/a2/0b/36/a20b36d527c821288034d460d5942ee7.jpg' },
         ],
     },
     {
