@@ -88,6 +88,7 @@ const HomeScreen = () => {
         <View style={styles.iconRow}>
           <TouchableOpacity style={styles.icon} onPress={() => navigation.navigate('Favoritos', { favorites })}>
             <Icon name="heart" size={24} color={isDark ? '#e9a0b8' : '#4B4F56'} />
+
           </TouchableOpacity>
           <TouchableOpacity style={styles.icon}>
             <Icon name="calendar" size={24} color={isDark ? '#e9a0b8' : '#4B4F56'} />

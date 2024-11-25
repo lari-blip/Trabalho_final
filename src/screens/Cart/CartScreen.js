@@ -8,6 +8,7 @@ import { api } from '../../services/index';
 import { useFocusEffect } from '@react-navigation/native';
 import { useTheme } from '../../contexts/ThemeContext';
 
+
 const CartScreen = () => {
     const { theme } = useTheme();
     const isDark = theme === 'dark';
@@ -30,6 +31,7 @@ const CartScreen = () => {
             const data = response.data.map((item) => ({
                 ...item,
                 quantity: item.quantity || 1,
+
             }));
             setCart(data);
         } catch (error) {
@@ -40,6 +42,7 @@ const CartScreen = () => {
     useFocusEffect(
         React.useCallback(() => {
             fetchCartData();
+
         }, [])
     );
     const calculateSubtotal = () => {
@@ -74,6 +77,7 @@ const CartScreen = () => {
             produto: 'Novo Produto',
             preco: 20.0,
             quantity: 1,
+
         };
 
         try {
@@ -89,6 +93,7 @@ const CartScreen = () => {
         try {
             await api.delete(`/${item.id}`);
             await fetchCartData();
+
         } catch (error) {
             console.error('Erro ao remover item:', error.response?.data || error.message);
         }
@@ -114,6 +119,7 @@ const CartScreen = () => {
         }
     };
 
+
     return (
         <ScrollView contentContainerStyle={[styles.scrollContainer, { backgroundColor: isDark ? '#121212' : '#f5f5f5' }]}>
             <View style={styles.logocontainer}>
@@ -132,6 +138,7 @@ const CartScreen = () => {
                         <CartItem
                             key={item.id}
                             itemName={item.produto}
+
                             price={item.preco}
                             onRemove={() => handleRemoveFromCart(item)}
                         />
@@ -180,12 +187,14 @@ const CartScreen = () => {
 
             <View style={styles.finishContainer}>
                 <TouchableOpacity style={[styles.buttonFinish, { backgroundColor: isDark ? '#e9a0b8' : '#F2AA7D' }]} onPress={handleFinalizePurchase}>
+
                     <Text style={styles.buttonFinishText}>Finalizar</Text>
                 </TouchableOpacity>
             </View>
 
             <View style={styles.addButtonContainer}>
                 <TouchableOpacity style={[styles.addButton, { backgroundColor: isDark ? '#e9a0b8' : '#F2AA7D' }]} onPress={fetchCartData}>
+
                     <Text style={styles.addButtonText}>Atualizar Carrinho</Text>
                 </TouchableOpacity>
             </View>
@@ -336,6 +345,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginVertical: 20,
     },
+
 });
 
 export default CartScreen;

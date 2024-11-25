@@ -5,6 +5,7 @@ import NetInfo from '@react-native-community/netinfo';
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { ThemeProvider } from './src/contexts/ThemeContext';
 
+
 const NoInternetScreen = ({ onRetry }) => (
     <View style={styles.noInternetContainer}>
         <Text style={styles.noInternetText}>Sem conexão com a internet.</Text>
@@ -18,6 +19,7 @@ export default function App() {
     const [isConnected, setIsConnected] = useState(true);
 
     useEffect(() => {
+
         const unsubscribe = NetInfo.addEventListener((state) => {
             setIsConnected(state.isConnected);
         });
@@ -26,6 +28,7 @@ export default function App() {
     }, []);
 
     const handleRetry = () => {
+
         NetInfo.fetch().then((state) => {
             setIsConnected(state.isConnected);
         });

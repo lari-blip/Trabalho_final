@@ -9,6 +9,7 @@ import { api } from '../../services/index';
 
 
 
+
 export default function AgendamentoScreen() {
     const [likes, setLikes] = useState([0, 0, 0]);
     const [comments, setComments] = useState([[], [], []]);
@@ -113,6 +114,7 @@ export default function AgendamentoScreen() {
 
         try {
             await api.post('/', newItem);
+
             Alert.alert('Horario adicionado ao carrinho!');
 
 
@@ -200,7 +202,7 @@ export default function AgendamentoScreen() {
                     <Text style={styles.actionButtonText}>Agendar</Text>
                 </TouchableOpacity>
             </View>
-
+          
             <Text style={styles.title}>Serviços em Destaque</Text>
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.servicesContainer}>
                 {services.map((service) => (
