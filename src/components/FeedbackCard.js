@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         textAlign: 'left',
         color: '#555',
-        marginHorizontal: 10, // Adiciona espaço nas laterais
+        marginHorizontal: 10,
     },
 
 

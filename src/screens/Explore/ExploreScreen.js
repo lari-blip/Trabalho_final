@@ -1,7 +1,10 @@
 import React from 'react';
 import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity, ScrollView, ImageBackground } from 'react-native';
+import { useTheme } from '../../contexts/ThemeContext';
 
 export default function ExploreScreen({ navigation }) {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
 
   const exploreItems = [
     {
@@ -40,8 +43,8 @@ export default function ExploreScreen({ navigation }) {
   };
 
   const renderItem = ({ item }) => (
-    <View style={styles.categoryCard}>
-      <Text style={styles.sectionTitle}>{item.name}</Text>
+    <View style={[styles.categoryCard, { backgroundColor: isDark ? '#333' : 'rgba(255, 255, 255, 0.85)' }]}>
+      <Text style={[styles.sectionTitle, { color: isDark ? '#fff' : '#333' }]}>{item.name}</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {item.images.map((image, index) => (
           <View style={styles.imageCard} key={index}>
@@ -53,13 +56,13 @@ export default function ExploreScreen({ navigation }) {
   );
 
   return (
-    <ImageBackground 
-      source={{uri: 'https://i.pinimg.com/736x/e5/37/3e/e5373ee2006e669ce7443ba43e8a6fe8.jpg'}} // Link da imagem de fundo
-      style={styles.container}
-      imageStyle={styles.backgroundImage} 
+    <ImageBackground
+      source={{ uri: 'https://i.pinimg.com/736x/e5/37/3e/e5373ee2006e669ce7443ba43e8a6fe8.jpg' }}
+      style={[styles.container, { backgroundColor: isDark ? '#000000' : '#f5f5f5' }]}
+      imageStyle={styles.backgroundImage}
     >
       <View style={styles.overlay}>
-        <Text style={styles.pageTitle}>Explorar</Text>
+        <Text style={[styles.pageTitle, { color: isDark ? '#fff' : '#333' }]}>Explorar</Text>
         <FlatList
           data={exploreItems}
           renderItem={renderItem}
@@ -67,7 +70,7 @@ export default function ExploreScreen({ navigation }) {
           contentContainerStyle={styles.contentContainer}
           showsVerticalScrollIndicator={false}
         />
-        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+        <TouchableOpacity style={[styles.backButton, { backgroundColor: isDark ? '#e9a0b8' : '#e9a0b8' }]} onPress={() => navigation.goBack()}>
           <Text style={styles.backButtonText}>Voltar</Text>
         </TouchableOpacity>
       </View>
@@ -83,8 +86,8 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   overlay: {
-    flex: 1, 
-    width: '100%', 
+    flex: 1,
+    width: '100%',
     padding: 30,
     justifyContent: 'flex-start',
   },
@@ -94,13 +97,12 @@ const styles = StyleSheet.create({
   pageTitle: {
     fontSize: 28,
     fontWeight: '700',
-    color: '#fff',
     marginBottom: 16,
     textAlign: 'center',
-    fontFamily: 'Poppins', // Fonte personalizada
+    fontFamily: 'Poppins',
   },
   contentContainer: {
-    paddingBottom: 20, 
+    paddingBottom: 20,
   },
   logoContainer: {
     alignItems: 'center',
@@ -109,14 +111,12 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 20,
     fontWeight: '600',
-    color: '#5E3B26',
     marginBottom: 12,
     textAlign: 'left',
   },
   categoryCard: {
-    backgroundColor: 'rgba(255, 255, 255, 0.85)', // Fundo branco translúcido para os cards
     borderRadius: 15,
-    marginBottom: 20, 
+    marginBottom: 20,
     shadowColor: '#000',
     shadowOpacity: 0.15,
     shadowRadius: 10,
@@ -124,9 +124,9 @@ const styles = StyleSheet.create({
     padding: 12,
   },
   imageCard: {
-    backgroundColor: 'transparent', // Fundo transparente para a imagem
+    backgroundColor: 'transparent',
     borderRadius: 15,
-    marginRight: 15, 
+    marginRight: 15,
     padding: 5,
     shadowColor: '#000',
     shadowOpacity: 0.1,
@@ -140,7 +140,6 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   backButton: {
-    backgroundColor: '#e9a0b8',
     paddingVertical: 15,
     borderRadius: 10,
     alignItems: 'center',

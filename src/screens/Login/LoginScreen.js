@@ -9,11 +9,13 @@ import {
   StyleSheet,
   ImageBackground,
   Image,
-
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { useTheme } from '../../contexts/ThemeContext';
 
 export default function LoginScreen({ navigation }) {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -27,12 +29,12 @@ export default function LoginScreen({ navigation }) {
       Alert.alert('Erro', 'Por favor, preencha todos os campos!');
       return;
     }
-  
+
     if (!validateEmail(email)) {
       Alert.alert('Erro', 'Por favor, insira um e-mail válido!');
       return;
     }
-  
+
     try {
       const response = await axios.get(
         `https://6740e385d0b59228b7f1adeb.mockapi.io/users`,
@@ -43,7 +45,6 @@ export default function LoginScreen({ navigation }) {
           },
         }
       );
-  
       if (response.data.length > 0) {
         Alert.alert('Bem-vindo!', `Olá, ${response.data[0].email}`);
         navigation.navigate('Home');
@@ -55,30 +56,25 @@ export default function LoginScreen({ navigation }) {
       console.error(error);
     }
   };
-
   return (
-
-    <ImageBackground 
-      source={{uri: 'https://i.pinimg.com/736x/b3/31/f5/b331f538d29019dfbc69fa3f564eb99f.jpg'}}
+    <ImageBackground
+      source={{ uri: 'https://i.pinimg.com/736x/b3/31/f5/b331f538d29019dfbc69fa3f564eb99f.jpg' }}
       style={styles.container}
       imageStyle={styles.backgroundImage}
     >
       <View style={styles.overlay}>
-        <Image source={{uri: 'https://i.imgur.com/ULWXfpT.png'}} style={styles.logo} />
-        
+        <Image source={{ uri: 'https://i.imgur.com/ULWXfpT.png' }} style={styles.logo} />
         <Text style={styles.title}>Entrar</Text>
-        
         <TextInput
-          style={styles.input}
+          style={[styles.input, { borderColor: isDark ? '#e9a0b8' : '#F2AA7D' }]}
           placeholder="Email"
           placeholderTextColor="#ccc"
           value={email}
           onChangeText={setEmail}
           keyboardType="email-address"
         />
-        
         <TextInput
-          style={styles.input}
+          style={[styles.input, { borderColor: isDark ? '#e9a0b8' : '#F2AA7D' }]}
           placeholder="Senha"
           placeholderTextColor="#ccc"
           secureTextEntry
@@ -86,46 +82,40 @@ export default function LoginScreen({ navigation }) {
           onChangeText={setPassword}
           maxLength={6}
         />
-        
-        <TouchableOpacity style={styles.button} onPress={handleLogin}>
+        <TouchableOpacity style={[styles.button, { backgroundColor: isDark ? '#e9a0b8' : '#F2AA7D' }]} onPress={handleLogin}>
           <Text style={styles.buttonText}>Entrar</Text>
         </TouchableOpacity>
-        
         <View style={styles.registerRow}>
           <Text style={styles.text}>Não tem uma conta? </Text>
           <TouchableOpacity onPress={() => navigation.navigate('Cadastro')}>
-            <Text style={styles.registerText}>Cadastre-se</Text>
+            <Text style={[styles.registerText, { color: isDark ? '#e9a0b8' : '#F2AA7D' }]}>Cadastre-se</Text>
           </TouchableOpacity>
         </View>
-
-        {/* Ícones de login social */}
         <View style={styles.socialContainer}>
-          <TouchableOpacity style={styles.socialButton}>
+          <TouchableOpacity style={[styles.socialButton, { borderColor: isDark ? '#e9a0b8' : '#F2AA7D' }]}>
             <Icon name="google" size={30} color="#fff" />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.socialButton}>
+          <TouchableOpacity style={[styles.socialButton, { borderColor: isDark ? '#e9a0b8' : '#F2AA7D' }]}>
             <Icon name="instagram" size={30} color="#fff" />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.socialButton}>
+          <TouchableOpacity style={[styles.socialButton, { borderColor: isDark ? '#e9a0b8' : '#F2AA7D' }]}>
             <Icon name="facebook" size={30} color="#fff" />
           </TouchableOpacity>
         </View>
       </View>
     </ImageBackground>
-
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
   },
   overlay: {
-    backgroundColor: 'rgba(0, 0, 0, 0.6)', 
+    backgroundColor: 'rgba(0, 0, 0, 0.6)',
     width: '100%',
     height: '100%',
     justifyContent: 'center',
@@ -145,34 +135,27 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     color: '#fff',
-    fontFamily: 'Poppins', 
-
+    fontFamily: 'Poppins',
     textAlign: 'center',
     marginBottom: 20,
   },
   input: {
-
-    backgroundColor: 'transparent', 
-    paddingVertical: 15, 
+    backgroundColor: 'transparent',
+    paddingVertical: 15,
     paddingHorizontal: 20,
     borderRadius: 30,
     borderWidth: 2,
-    borderColor: '#e9a0b8',
-    borderColor: '#F2AA7D',
     marginBottom: 15,
-    fontSize: 18, 
-    color: '#fff', 
-    width: '100%', 
+    fontSize: 18,
+    color: '#fff',
+    width: '100%',
   },
   button: {
-    backgroundColor: '#e9a0b8',
-    backgroundColor: '#F2AA7D',
-    paddingVertical: 15, 
+    paddingVertical: 15,
     borderRadius: 30,
     alignItems: 'center',
     marginBottom: 20,
     width: '100%',
-
   },
   buttonText: {
     color: '#fff',
@@ -182,36 +165,27 @@ const styles = StyleSheet.create({
   registerRow: {
     flexDirection: 'row',
     justifyContent: 'center',
-
-    marginBottom: 30, 
+    marginBottom: 30,
   },
   text: {
     color: '#fff',
   },
   registerText: {
-    color: '#e9a0b8',
-    color: '#F2AA7D',
-
     fontWeight: 'bold',
   },
   socialContainer: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-
     marginTop: 20,
   },
   socialButton: {
-    backgroundColor: 'transparent', 
+    backgroundColor: 'transparent',
     borderWidth: 2,
-    borderColor: '#e9a0b8',
-    borderColor: '#F2AA7D',
-
     width: 60,
     height: 60,
     borderRadius: 30,
     justifyContent: 'center',
     alignItems: 'center',
   },
-
 });
 

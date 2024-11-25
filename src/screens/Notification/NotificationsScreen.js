@@ -2,8 +2,8 @@ import React from 'react';
 import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, ImageBackground } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation, useIsFocused } from '@react-navigation/native';
+import { useTheme } from '../../contexts/ThemeContext';
 
-// Dados de notificações
 const notifications = [
   { id: 1, title: 'Novo serviço disponível!', description: 'Confira o novo serviço de cabelo no salão Beleza Total.', date: '2024-11-21' },
   { id: 2, title: 'Promoção exclusiva', description: 'Ganhe 10% de desconto em todos os serviços do salão Estilo & Charme.', date: '2024-11-19' },
@@ -14,41 +14,40 @@ const notifications = [
 const NotificationsScreen = () => {
   const isFocused = useIsFocused();
   const navigation = useNavigation();
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
 
   return (
     <ImageBackground
-      source={{ uri: 'https://example.com/your-background-image.jpg' }} // Imagem de fundo
-      style={styles.container}
-      imageStyle={[styles.backgroundImage, { opacity: isFocused ? 0.4 : 0.7 }]} // Mudando a opacidade da imagem com base no foco
+      source={{ uri: 'https://example.com/your-background-image.jpg' }}
+      style={[styles.container, { backgroundColor: isDark ? '#121212' : '#f5f5f5' }]}
+      imageStyle={[styles.backgroundImage, { opacity: isFocused ? 0.4 : 0.7 }]}
     >
       <ScrollView contentContainerStyle={styles.contentContainer}>
 
-        {/* Linha de ícones no topo */}
         <View style={styles.iconRow}>
           <TouchableOpacity style={styles.icon}>
-            <Icon name="heart" size={24} color="#4B4F56" />
+            <Icon name="heart" size={24} color={isDark ? '#e9a0b8' : '#4B4F56'} />
           </TouchableOpacity>
           <TouchableOpacity style={styles.icon}>
-            <Icon name="calendar" size={24} color="#4B4F56" />
+            <Icon name="calendar" size={24} color={isDark ? '#e9a0b8' : '#4B4F56'} />
           </TouchableOpacity>
           <TouchableOpacity style={styles.icon}>
-            <Icon name="history" size={24} color="#4B4F56" />
+            <Icon name="history" size={24} color={isDark ? '#e9a0b8' : '#4B4F56'} />
           </TouchableOpacity>
           <TouchableOpacity style={styles.icon}>
-            <Icon name="user" size={24} color="#4B4F56" />
+            <Icon name="user" size={24} color={isDark ? '#e9a0b8' : '#4B4F56'} />
           </TouchableOpacity>
         </View>
 
-        {/* Título da página */}
-        <Text style={styles.pageTitle}>Notificações</Text>
+        <Text style={[styles.pageTitle, { color: isDark ? '#fff' : '#4B4F56' }]}>Notificações</Text>
 
-        {/* Lista de notificações */}
         <ScrollView style={styles.notificationList}>
           {notifications.map((notification) => (
-            <View key={notification.id} style={styles.notificationCard}>
-              <Text style={styles.notificationTitle}>{notification.title}</Text>
-              <Text style={styles.notificationDescription}>{notification.description}</Text>
-              <Text style={styles.notificationDate}>{notification.date}</Text>
+            <View key={notification.id} style={[styles.notificationCard, { backgroundColor: isDark ? '#333' : 'rgba(255, 255, 255, 0.8)' }]}>
+              <Text style={[styles.notificationTitle, { color: isDark ? '#fff' : '#333' }]}>{notification.title}</Text>
+              <Text style={[styles.notificationDescription, { color: isDark ? '#bbb' : '#4B4F56' }]}>{notification.description}</Text>
+              <Text style={[styles.notificationDate, { color: isDark ? '#999' : '#9b9b9b' }]}>{notification.date}</Text>
             </View>
           ))}
         </ScrollView>
@@ -66,13 +65,11 @@ const styles = StyleSheet.create({
   pageTitle: {
     fontSize: 22,
     fontWeight: '600',
-    color: '#4B4F56',
     marginBottom: 20,
     textAlign: 'center',
   },
   notificationList: { paddingVertical: 10 },
   notificationCard: {
-    backgroundColor: 'rgba(255, 255, 255, 0.8)', // Fundo transparente com opacidade
     borderRadius: 15,
     marginBottom: 15,
     padding: 15,
@@ -82,17 +79,14 @@ const styles = StyleSheet.create({
   notificationTitle: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#333',
     marginBottom: 5,
   },
   notificationDescription: {
     fontSize: 14,
-    color: '#4B4F56',
     marginBottom: 5,
   },
   notificationDate: {
     fontSize: 12,
-    color: '#9b9b9b',
   },
 });
 

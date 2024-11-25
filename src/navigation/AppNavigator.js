@@ -2,6 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
+import { useTheme } from '../contexts/ThemeContext';
 
 import ExploreScreen from '../screens/Explore/ExploreScreen';
 import HomeScreen from '../screens/Home/HomeScreen';
@@ -14,25 +15,46 @@ import CartScreen from '../screens/Cart/CartScreen';
 import FavoritesScreen from '../screens/Favoritos/FavoriteScreen';
 import CategoriaScreen from '../screens/Categorias';
 import ServicoDetalhesScreen from '../screens/ServicoDetalhes';
-import ServiceDetailScreen from '../screens/ServiceDetail';  // Adicionar esta linha
+import ServiceDetailScreen from '../screens/ServiceDetail';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 function MainTabs() {
+    const { theme } = useTheme();
+    const isDark = theme === 'dark';
+
     return (
         <Tab.Navigator
-            screenOptions={{
-                tabBarActiveTintColor: '#e9a0b8',
+            screenOptions={({ route }) => ({
+                tabBarActiveTintColor: isDark ? '#e9a0b8' : '#e9a0b8',
                 tabBarInactiveTintColor: 'gray',
                 tabBarStyle: {
                     height: 70,
                     paddingBottom: 10,
                     paddingTop: 10,
-                    backgroundColor: '#fff',
+                    backgroundColor: isDark ? '#121212' : '#fff',
                 },
-            }}
+                tabBarIcon: ({ color, size }) => {
+                    let iconName;
+
+                    if (route.name === 'Home') {
+                        iconName = 'home';
+                    } else if (route.name === 'Explore') {
+                        iconName = 'search';
+                    } else if (route.name === 'Cart') {
+                        iconName = 'cart';
+                    } else if (route.name === 'Notifications') {
+                        iconName = 'notifications';
+                    } else if (route.name === 'Login') {
+                        iconName = 'log-in';
+                    }
+
+                    return <Ionicons name={iconName} size={size} color={color} />;
+                },
+            })}
         >
+
             <Tab.Screen
                 name="Home"
                 component={HomeScreen}

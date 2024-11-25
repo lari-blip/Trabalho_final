@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
+import { useTheme } from '../../contexts/ThemeContext';
 
 const categories = [
   { name: 'Unhas', image: 'https://i.pinimg.com/736x/85/f9/5d/85f95dfab5b4b80ccc9fae275c7bec5f.jpg' },
@@ -33,8 +34,11 @@ const salons = [
 
 const HomeScreen = () => {
   const navigation = useNavigation();
+  const { theme, toggleTheme } = useTheme();
   const [favorites, setFavorites] = useState(new Set());
   const [scaleAnim] = useState(new Animated.Value(1));
+
+  const isDark = theme === 'dark';
 
   const toggleFavorite = (salonId) => {
     setFavorites((prevFavorites) => {
@@ -57,10 +61,7 @@ const HomeScreen = () => {
 
   const handleSalonClick = (salonId) => {
     const selectedSalon = salons.find((salon) => salon.id === salonId);
-    navigation.navigate('PerfilSalao', {
-      profileImage: selectedSalon.image,
-      profileName: selectedSalon.name,
-    });
+    navigation.navigate('PerfilSalao', { profileImage: selectedSalon.image, profileName: selectedSalon.name });
   };
 
   const handleCategoryClick = (categoryName) => {
@@ -70,47 +71,52 @@ const HomeScreen = () => {
   return (
     <ImageBackground
       source={{ uri: 'https://i.pinimg.com/736x/ce/0a/fb/ce0afb23a19a0de0341b3dc94c0343b9.jpg' }}
-      style={styles.container}
+      style={[styles.container, { backgroundColor: isDark ? '#121212' : '#ffffff' }]}
       imageStyle={styles.backgroundImage}
     >
       <ScrollView contentContainerStyle={styles.contentContainer}>
-
         <View style={styles.logoContainer}>
           <Image source={{ uri: 'https://i.imgur.com/ULWXfpT.png' }} style={styles.logo} />
         </View>
 
         <TextInput
-          style={styles.searchBar}
+          style={[styles.searchBar, { backgroundColor: isDark ? '#333333' : '#FFF', color: isDark ? '#FFF' : '#333' }]}
           placeholder="Buscar serviços ou salões..."
-          placeholderTextColor="#9b9b9b"
+          placeholderTextColor={isDark ? '#9b9b9b' : '#333'}
         />
 
         <View style={styles.iconRow}>
-          <TouchableOpacity style={styles.icon}>
-            <Icon name="heart" size={24} color="#4B4F56" />
+          <TouchableOpacity style={styles.icon} onPress={() => navigation.navigate('Favoritos', { favorites })}>
+            <Icon name="heart" size={24} color={isDark ? '#e9a0b8' : '#4B4F56'} />
           </TouchableOpacity>
           <TouchableOpacity style={styles.icon}>
-            <Icon name="calendar" size={24} color="#4B4F56" />
+            <Icon name="calendar" size={24} color={isDark ? '#e9a0b8' : '#4B4F56'} />
           </TouchableOpacity>
           <TouchableOpacity style={styles.icon}>
-            <Icon name="history" size={24} color="#4B4F56" />
+            <Icon name="history" size={24} color={isDark ? '#e9a0b8' : '#4B4F56'} />
           </TouchableOpacity>
           <TouchableOpacity style={styles.icon}>
-            <Icon name="user" size={24} color="#4B4F56" />
+            <Icon name="user" size={24} color={isDark ? '#e9a0b8' : '#4B4F56'} />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.icon} onPress={toggleTheme}>
+            <Icon name={isDark ? 'sun-o' : 'moon-o'} size={24} color={isDark ? '#e9a0b8' : '#4B4F56'} />
           </TouchableOpacity>
         </View>
 
-        <Text style={styles.sectionTitle}>Categorias</Text>
+        <Text style={[styles.sectionTitle, { color: isDark ? '#fff' : '#4B4F56' }]}>Categorias</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.categoryScroll}>
           {categories.map((category) => (
-            <TouchableOpacity key={category.name} style={styles.categoryCard} onPress={() => handleCategoryClick(category.name)}>
+            <TouchableOpacity
+              key={category.name}
+              style={[styles.categoryCard, { backgroundColor: isDark ? 'rgba(0, 0, 0, 0.6)' : 'rgba(255, 255, 255, 0.6)' }]}
+              onPress={() => handleCategoryClick(category.name)}
+            >
               <Image source={{ uri: category.image }} style={styles.categoryImage} />
-              <Text style={styles.categoryText}>{category.name}</Text>
+              <Text style={[styles.categoryText, { color: isDark ? '#FFF' : '#333' }]}>{category.name}</Text>
             </TouchableOpacity>
           ))}
         </ScrollView>
-
-        <Text style={styles.sectionTitle}>Salões</Text>
+        <Text style={[styles.sectionTitle, { color: isDark ? '#fff' : '#4B4F56' }]}>Salões</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.salonScroll}>
           {salons.map((salon) => {
             const isFavorite = favorites.has(salon.id);
@@ -119,7 +125,7 @@ const HomeScreen = () => {
                 <TouchableOpacity onPress={() => handleSalonClick(salon.id)}>
                   <Image source={{ uri: salon.image }} style={styles.salonImage} />
                 </TouchableOpacity>
-                <Text style={styles.salonName}>{salon.name}</Text>
+                <Text style={[styles.salonName, { color: isDark ? '#FFF' : '#333' }]}>{salon.name}</Text>
                 <TouchableOpacity
                   onPress={() => {
                     toggleFavorite(salon.id);
@@ -131,7 +137,7 @@ const HomeScreen = () => {
                     <Icon
                       name={isFavorite ? 'heart' : 'heart-o'}
                       size={24}
-                      color={isFavorite ? '#F2AA7D' : '#4B4F56'}
+                      color={isDark ? '#e9a0b8' : isFavorite ? '#e9a0b8' : '#4B4F56'}
                     />
                   </Animated.View>
                 </TouchableOpacity>
@@ -151,7 +157,6 @@ const styles = StyleSheet.create({
   logoContainer: { alignItems: 'center', marginBottom: 20 },
   logo: { width: 140, height: 200, resizeMode: 'contain' },
   searchBar: {
-    backgroundColor: '#FFF',
     paddingVertical: 12,
     paddingLeft: 20,
     borderRadius: 30,
@@ -159,33 +164,25 @@ const styles = StyleSheet.create({
     borderColor: '#DDDDDD',
     marginBottom: 20,
     fontSize: 14,
-    color: '#333',
   },
-  sectionTitle: { fontSize: 22, fontWeight: '600', color: '#4B4F56', marginBottom: 15 },
+  sectionTitle: { fontSize: 22, fontWeight: '600', marginBottom: 15 },
   categoryScroll: { paddingVertical: 10 },
   categoryCard: {
-    backgroundColor: 'rgba(255, 255, 255, 0.6)',
     borderRadius: 15,
     marginRight: 15,
     padding: 5,
-    paddingVertical: 5,
     alignItems: 'center',
     justifyContent: 'center',
-    borderColor: '#ddd',
-    borderWidth: 1,
   },
-  categoryImage: { width: 100, height: 100, borderRadius: 15, marginBottom: 8 },
-  categoryText: {
-    fontSize: 14,
-    color: '#4B4F56',
-  },
-  salonScroll: { paddingVertical: 10 },
-  salonCard: { width: 140, marginRight: 15 },
-  salonImage: { width: '100%', height: 100, borderRadius: 15, marginBottom: 10 },
-  salonName: { fontSize: 16, fontWeight: '600', color: '#333', textAlign: 'center' },
-  favoriteIcon: { alignSelf: 'center' },
+  categoryImage: { width: 100, height: 100, borderRadius: 10 },
+  categoryText: { fontSize: 14, fontWeight: 'bold', marginTop: 10 },
+  salonScroll: { marginVertical: 20 },
+  salonCard: { marginRight: 15, alignItems: 'center' },
+  salonImage: { width: 150, height: 150, borderRadius: 15 },
+  salonName: { marginTop: 10, fontSize: 16, fontWeight: '500' },
+  favoriteIcon: { marginTop: 10 },
   iconRow: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 20 },
-  icon: { padding: 10 },
+  icon: { paddingHorizontal: 10 },
 });
 
 export default HomeScreen;

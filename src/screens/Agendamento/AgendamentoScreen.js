@@ -5,6 +5,9 @@ import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { useRoute } from '@react-navigation/native';
 import { TextInput } from 'react-native';
+import { api } from '../../services/index';
+
+
 
 export default function AgendamentoScreen() {
     const [likes, setLikes] = useState([0, 0, 0]);
@@ -49,14 +52,7 @@ export default function AgendamentoScreen() {
         setLikes(updatedLikes);
     };
 
-    /**
-     * Adiciona um comentário ao post
-     * 
-     * @param {number} postId - ID do post que recebeu o comentário
-     * 
-     * Função que verifica se o comentário não está vazio e o adiciona ao estado dos comentários.
-     * Caso o campo de comentário esteja vazio, exibe um alerta.
-     */
+
     const handleAddComment = (postId) => {
         if (newComment.trim() === "") {
             Alert.alert("Por favor, escreva um comentário.");
@@ -107,6 +103,26 @@ export default function AgendamentoScreen() {
     const handleAction = (action) => {
         Alert.alert(action);
     };
+
+
+    const handleAddToCart = async () => {
+        const newItem = {
+            produto: 'Novo Horario Agendado',
+            preco: 120.0,
+        };
+
+        try {
+            await api.post('/', newItem);
+            Alert.alert('Horario adicionado ao carrinho!');
+
+
+        } catch (error) {
+            console.error('Erro ao adicionar item:', error.response?.data || error.message);
+            Alert.alert('Erro ao adicionar', 'Não foi possível adicionar o item.');
+        }
+    };
+
+
 
     return (
         <ScrollView style={styles.container}>
@@ -180,8 +196,8 @@ export default function AgendamentoScreen() {
                 <TouchableOpacity onPress={() => navigation.navigate('PerfilSalao')} style={styles.actionButtonOutline}>
                     <Text style={styles.actionButtonTextOutline}>Ver Perfil</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => handleAction('Agendar Horário')} style={styles.actionButton}>
-                    <Text style={styles.actionButtonText}>Agendar Horário</Text>
+                <TouchableOpacity onPress={handleAddToCart} style={styles.actionButton}>
+                    <Text style={styles.actionButtonText}>Agendar</Text>
                 </TouchableOpacity>
             </View>
 

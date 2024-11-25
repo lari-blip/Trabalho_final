@@ -2,37 +2,55 @@ import React, { useState, useEffect } from 'react';
 import { ScrollView, TouchableOpacity, Text, StyleSheet, View, Alert } from 'react-native';
 import CartItem from '../../components/CartItem';
 import { TextInput } from 'react-native-gesture-handler';
-import FeedbackCard from '../../components/FeedbackCard';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { Picker } from '@react-native-picker/picker';
+import { api } from '../../services/index';
+import { useFocusEffect } from '@react-navigation/native';
+import { useTheme } from '../../contexts/ThemeContext';
 
 const CartScreen = () => {
+    const { theme } = useTheme();
+    const isDark = theme === 'dark';
+
     const [selectedValue, setSelectedValue] = useState('opcao1');
     const [cart, setCart] = useState([]);
-    const [discount, setDiscount] = useState(0); // Valor do desconto
-    const [couponInput, setCouponInput] = useState(''); // Cupom inserido pelo usuário
+    const [discount, setDiscount] = useState(0);
+    const [couponInput, setCouponInput] = useState('');
 
-    // Exemplos de cupons
     const coupons = [
         { code: 'BELEZA10', percent: 10 },
         { code: 'BELEZA15', percent: 15 },
         { code: 'BELEZA20', percent: 20 },
         { code: 'PRIMEIRACOMPRA', percent: 50 },
-
     ];
 
-    // Calcula o subtotal
-    const calculateSubtotal = () => {
-        return cart.reduce((sum, item) => sum + item.price, 0);
+    const fetchCartData = async () => {
+        try {
+            const response = await api.get('/');
+            const data = response.data.map((item) => ({
+                ...item,
+                quantity: item.quantity || 1,
+            }));
+            setCart(data);
+        } catch (error) {
+            console.error('Erro ao buscar carrinho:', error.response?.data || error.message);
+        }
     };
 
-    // Calcula o total com desconto
+    useFocusEffect(
+        React.useCallback(() => {
+            fetchCartData();
+        }, [])
+    );
+    const calculateSubtotal = () => {
+        return cart.reduce((sum, item) => sum + item.preco * item.quantity, 0);
+    };
+
     const calculateTotal = () => {
         const subtotal = calculateSubtotal();
-        return Math.max(subtotal - discount, 0); // Garante que o total não seja negativo
+        return Math.max(subtotal - discount, 0);
     };
 
-    // Função para aplicar o cupom
     const handleApplyCoupon = () => {
         if (cart.length === 0) {
             Alert.alert('Carrinho vazio', 'Adicione itens ao carrinho antes de aplicar um cupom.');
@@ -47,97 +65,111 @@ const CartScreen = () => {
         } else {
             Alert.alert('Cupom Inválido', 'O cupom digitado não é válido ou não existe.');
         }
+
+        setCouponInput('');
     };
 
-    // Função para adicionar um item ao carrinho
-    const handleAddToCart = () => {
+    const handleAddToCart = async () => {
         const newItem = {
-            id: cart.length + 1,
-            name: 'Novo Produto',
-            price: 20.0, // Exemplo de preço
+            produto: 'Novo Produto',
+            preco: 20.0,
+            quantity: 1,
         };
-        setCart([...cart, newItem]);
+
+        try {
+            await api.post('/', newItem);
+            await fetchCartData();
+        } catch (error) {
+            console.error('Erro ao adicionar item:', error.response?.data || error.message);
+            Alert.alert('Erro ao adicionar', 'Não foi possível adicionar o item.');
+        }
     };
 
-    // Função para remover um item do carrinho
-    const handleRemoveFromCart = (index) => {
-        const updatedCart = cart.filter((_, i) => i !== index);
-        setCart(updatedCart);
+    const handleRemoveFromCart = async (item) => {
+        try {
+            await api.delete(`/${item.id}`);
+            await fetchCartData();
+        } catch (error) {
+            console.error('Erro ao remover item:', error.response?.data || error.message);
+        }
+    };
 
-        // Zera o desconto se o carrinho estiver vazio
-        if (updatedCart.length === 0) {
+    const handleFinalizePurchase = async () => {
+        try {
+            const response = await api.get('/');
+            const cartItems = response.data;
+
+            await Promise.all(
+                cartItems.map(async (item) => {
+                    await api.delete(`/${item.id}`);
+                })
+            );
+
+            setCart([]);
             setDiscount(0);
+            Alert.alert('Compra Finalizada', 'Obrigado pela sua compra!');
+        } catch (error) {
+            console.error('Erro ao finalizar a compra:', error.response?.data || error.message);
+            Alert.alert('Erro ao finalizar compra', 'Ocorreu um erro ao tentar finalizar a compra. Tente novamente.');
         }
     };
-
-    // Efetua o cálculo do desconto sempre que o subtotal mudar
-    useEffect(() => {
-        // Se houver cupons e o carrinho não estiver vazio, calcula o desconto baseado no subtotal
-        if (cart.length > 0 && couponInput) {
-            handleApplyCoupon();
-        } else {
-            setDiscount(0); // Se o carrinho estiver vazio, zera o desconto
-        }
-    }, [cart]);
 
     return (
-        <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <ScrollView contentContainerStyle={[styles.scrollContainer, { backgroundColor: isDark ? '#121212' : '#f5f5f5' }]}>
             <View style={styles.logocontainer}>
-                <MaterialCommunityIcons name="cart-variant" size={80} color="black" />
+                <MaterialCommunityIcons name="cart-variant" size={80} color={isDark ? '#fff' : '#000'} />
             </View>
 
             <View style={styles.summaryhead}>
-                <Text style={styles.titlesummary}>Resumo</Text>
+                <Text style={[styles.titlesummary, { color: isDark ? '#fff' : '#333' }]}>Resumo</Text>
             </View>
 
-            {/* Lista de itens no carrinho ou mensagem de carrinho vazio */}
             <View>
                 {cart.length === 0 ? (
-                    <Text style={styles.emptyCartText}>Carrinho vazio!</Text>
+                    <Text style={[styles.emptyCartText, { color: isDark ? '#fff' : '#999' }]}>Carrinho vazio!</Text>
                 ) : (
-                    cart.map((item, index) => (
+                    cart.map((item) => (
                         <CartItem
-                            key={index}
-                            itemName={item.name}
-                            price={item.price}
-                            onRemove={() => handleRemoveFromCart(index)} // Função para remover o item
+                            key={item.id}
+                            itemName={item.produto}
+                            price={item.preco}
+                            onRemove={() => handleRemoveFromCart(item)}
                         />
                     ))
                 )}
             </View>
 
             <View style={styles.totalcontainerfather}>
-                <View style={styles.totalcontainer1}>
-                    <Text style={styles.boxvaluetittle}>Desconto</Text>
-                    <Text style={styles.boxvalue}>R$ {discount.toFixed(2)}</Text>
+                <View style={[styles.totalcontainer1, { backgroundColor: isDark ? '#333' : '#fff' }]}>
+                    <Text style={[styles.boxvaluetittle, { color: isDark ? '#fff' : '#333' }]}>Desconto</Text>
+                    <Text style={[styles.boxvalue, { color: isDark ? '#fff' : '#333' }]}>R$ {discount.toFixed(2)}</Text>
                 </View>
-                <View style={styles.totalcontainer2}>
-                    <Text style={styles.boxvaluetittle}>Total</Text>
-                    <Text style={styles.boxvalue}>R$ {calculateTotal().toFixed(2)}</Text>
+                <View style={[styles.totalcontainer2, { backgroundColor: isDark ? '#333' : '#fff' }]}>
+                    <Text style={[styles.boxvaluetittle, { color: isDark ? '#fff' : '#333' }]}>Total</Text>
+                    <Text style={[styles.boxvalue, { color: isDark ? '#fff' : '#333' }]}>R$ {calculateTotal().toFixed(2)}</Text>
                 </View>
             </View>
 
             <View style={styles.containercupom}>
-                {/* Campo Cupom */}
                 <View style={styles.insertcupom}>
                     <TextInput
-                        style={styles.inputcupom}
+                        style={[styles.inputcupom, { backgroundColor: isDark ? '#333' : '#f9f9f9', color: isDark ? '#fff' : '#000' }]}
                         placeholder="Coloque o Cupom aqui"
-                        placeholderTextColor="#aaa"
+                        placeholderTextColor={isDark ? '#bbb' : '#aaa'}
                         value={couponInput}
                         onChangeText={setCouponInput}
                     />
-                    <TouchableOpacity style={styles.buttonCupom} onPress={handleApplyCoupon}>
+                    <TouchableOpacity style={[styles.buttonCupom, { backgroundColor: isDark ? '#e9a0b8' : '#F2AA7D' }]} onPress={handleApplyCoupon}>
                         <Text style={styles.buttonCupomText}>Aplicar</Text>
                     </TouchableOpacity>
                 </View>
             </View>
 
             <View style={styles.methodcontainer}>
-                <Text style={styles.titlesummary}>Selecione uma opção:</Text>
+                <Text style={[styles.titlesummary, { color: isDark ? '#fff' : '#333' }]}>Selecione uma opção:</Text>
                 <Picker
                     selectedValue={selectedValue}
-                    style={styles.inputmetodo}
+                    style={[styles.inputmetodo, { color: isDark ? '#fff' : '#000' }]}
                     onValueChange={(itemValue) => setSelectedValue(itemValue)}
                 >
                     <Picker.Item label="Pix" value="opcao1" />
@@ -147,20 +179,16 @@ const CartScreen = () => {
             </View>
 
             <View style={styles.finishContainer}>
-                <TouchableOpacity style={styles.buttonFinish}>
+                <TouchableOpacity style={[styles.buttonFinish, { backgroundColor: isDark ? '#e9a0b8' : '#F2AA7D' }]} onPress={handleFinalizePurchase}>
                     <Text style={styles.buttonFinishText}>Finalizar</Text>
                 </TouchableOpacity>
             </View>
 
-          
-
-            {/* Botão Add to Cart */}
             <View style={styles.addButtonContainer}>
-                <TouchableOpacity style={styles.addButton} onPress={handleAddToCart}>
-                    <Text style={styles.addButtonText}>Add to Cart</Text>
+                <TouchableOpacity style={[styles.addButton, { backgroundColor: isDark ? '#e9a0b8' : '#F2AA7D' }]} onPress={fetchCartData}>
+                    <Text style={styles.addButtonText}>Atualizar Carrinho</Text>
                 </TouchableOpacity>
             </View>
-
         </ScrollView>
     );
 };
@@ -182,7 +210,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingHorizontal: 20,
         paddingVertical: 0,
-
     },
     button: {
         paddingVertical: 4,
@@ -286,7 +313,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 80,
         marginBottom: 10,
-
     },
     addButtonContainer: {
         alignItems: 'center',
@@ -309,9 +335,7 @@ const styles = StyleSheet.create({
         color: '#999',
         textAlign: 'center',
         marginVertical: 20,
-            },
+    },
+});
 
-
-        });
-
-        export default CartScreen;
+export default CartScreen;
