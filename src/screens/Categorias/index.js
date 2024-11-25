@@ -58,7 +58,6 @@ const categories = [
         image: 'https://i.pinimg.com/736x/41/49/2e/41492ec1d96286d47cf6c73c6b944fa3.jpg',
         services: [
             { name: 'Navalhada', image: 'https://i.pinimg.com/736x/51/49/26/514926a9cd60b701f020bd6b432803ba.jpg' },
-            { name: 'Alisamento', image: 'https://i.pinimg.com/736x/56/72/a8/5672a8c39c81ec78e77ed239286aa6f4.jpg' },
             { name: 'Tintura', image: 'https://i.pinimg.com/736x/44/1d/4e/441d4e623382856daf4198084ad69741.jpg' },
             { name: 'HotTowelShave', image: 'https://i.pinimg.com/736x/55/02/09/550209bfb3c4a9dab07ec9cc92cb0d64.jpg' },
         ],
