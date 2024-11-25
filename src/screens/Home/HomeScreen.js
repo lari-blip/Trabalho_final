@@ -49,7 +49,7 @@ const HomeScreen = () => {
   };
 
   const animateHeart = () => {
-    Animated.sequence([ 
+    Animated.sequence([
       Animated.timing(scaleAnim, { toValue: 1.5, duration: 200, useNativeDriver: true }),
       Animated.timing(scaleAnim, { toValue: 1, duration: 200, useNativeDriver: true }),
     ]).start();
@@ -69,12 +69,12 @@ const HomeScreen = () => {
 
   return (
     <ImageBackground
-      source={{ uri: 'https://i.pinimg.com/736x/ce/0a/fb/ce0afb23a19a0de0341b3dc94c0343b9.jpg' }} 
+      source={{ uri: 'https://i.pinimg.com/736x/ce/0a/fb/ce0afb23a19a0de0341b3dc94c0343b9.jpg' }}
       style={styles.container}
-      imageStyle={styles.backgroundImage} 
+      imageStyle={styles.backgroundImage}
     >
       <ScrollView contentContainerStyle={styles.contentContainer}>
-        
+
         <View style={styles.logoContainer}>
           <Image source={{ uri: 'https://i.imgur.com/ULWXfpT.png' }} style={styles.logo} />
         </View>
@@ -146,7 +146,7 @@ const HomeScreen = () => {
 
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 20 },
-  backgroundImage: { opacity: 0.3 }, 
+  backgroundImage: { opacity: 0.3 },
   contentContainer: { paddingBottom: 20 },
   logoContainer: { alignItems: 'center', marginBottom: 20 },
   logo: { width: 140, height: 200, resizeMode: 'contain' },
@@ -164,22 +164,23 @@ const styles = StyleSheet.create({
   sectionTitle: { fontSize: 22, fontWeight: '600', color: '#4B4F56', marginBottom: 15 },
   categoryScroll: { paddingVertical: 10 },
   categoryCard: {
-    backgroundColor: 'rgba(255, 255, 255, 0.8)', 
+    backgroundColor: 'rgba(255, 255, 255, 0.6)',
     borderRadius: 15,
     marginRight: 15,
-    padding: 15,
+    padding: 5,
+    paddingVertical: 5,
     alignItems: 'center',
     justifyContent: 'center',
-    borderColor: '#ddd', 
+    borderColor: '#ddd',
     borderWidth: 1,
   },
   categoryImage: { width: 100, height: 100, borderRadius: 15, marginBottom: 8 },
   categoryText: {
     fontSize: 14,
-    color: '#4B4F56', 
+    color: '#4B4F56',
   },
   salonScroll: { paddingVertical: 10 },
-  salonCard: { width: 160, marginRight: 15 },
+  salonCard: { width: 140, marginRight: 15 },
   salonImage: { width: '100%', height: 100, borderRadius: 15, marginBottom: 10 },
   salonName: { fontSize: 16, fontWeight: '600', color: '#333', textAlign: 'center' },
   favoriteIcon: { alignSelf: 'center' },
